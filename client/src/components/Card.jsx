@@ -6,7 +6,7 @@ const Card = ({ id, value, isClicked, onClickF, matched }) =>  {
   return(
     <div onClick={onClickF} 
 
-    style={{ display: matched ? 'none' : 'block',
+    style={{ visibility: matched ? 'hidden' : 'default',
     backgroundColor: isClicked ? 'cyan' : 'white',
     borderRadius: 30, justifyItems: 'center', 
     borderColor: 'black', borderWidth: 2, borderStyle: 'solid'}}>

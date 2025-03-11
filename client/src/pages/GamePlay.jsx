@@ -1,72 +1,81 @@
-import React, { useEffect, useState } from 'react';
-import Card from '../components/Card';
-
-function shuffleArray(array){
-    for (var i = array.length - 1; i > 0; i--){
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+import React, { useState, useEffect } from 'react';
+import { socket } from "../socket/index";
+import Card from "../components/Card";
 
 const GamePlay = () => {
-    const numberOfPairs = 8;
     const [flippedCards, setFlippedCards] = useState([]);
-    const [shuffledArray, setShuffled] = useState([]);
     const [matchedPairs, setMatchedPairs] = useState([]);
+    const [roomName, setRoomName] = useState('');
+    const [playerName, setPlayerName] = useState('');
+    const [gameState, setGameState] = useState(null);
 
     useEffect(() => {
-        const shuffled = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-        shuffleArray(shuffled)
-        setShuffled(shuffled);
-    }, [])
+        socket.on('game_state', (game) => {
+            // Update the game state with the latest data from the backend
+            setGameState(game);
+            setFlippedCards(game.flippedCards); // Update flipped cards state
+            setMatchedPairs(game.matchedPairs); // Update matched pairs state
+        });
 
-    // Check card matched
-    useEffect(() => {
-        if (flippedCards.length === 2) {
-            const [firstIndex, secondIndex] = flippedCards;
-            const timeoutId = setTimeout(() => {
-                setFlippedCards([]);
-                if (shuffledArray[firstIndex] === shuffledArray[secondIndex]) {
-                    const newMatched = [...matchedPairs, shuffledArray[firstIndex]]
-                    setMatchedPairs(newMatched);
-                }
-            }, 1000); // Delay of 1 second before checking for match
+        socket.on('message', (message) => {
+            console.log(message);
+        });
 
-            return () => clearTimeout(timeoutId); //clear timeout
+        return () => {
+            socket.off('game_state');
+            socket.off('message');
+        };
+    }, []);
+
+    const handleCreateRoom = () => {
+        socket.emit('create_room', { roomName, difficulty: 'easy', count: 8 });
+    };
+
+    const handleJoinRoom = () => {
+        socket.emit('join_room', { username: playerName, roomName });
+    };
+
+    const handleFlipCard = (index) => {
+        if (flippedCards.length < 2 && !flippedCards.includes(index)) {
+            setFlippedCards((prev) => [...prev, index]);
+            socket.emit('flip_card', { roomName, index });
         }
-    }, [flippedCards, shuffledArray, matchedPairs]);
+    };
 
-    function handleClick(index){
-        if (flippedCards.length === 2)return;
-        const newFlippedCards = [...flippedCards, index];
-        setFlippedCards(newFlippedCards);
-    }
-
-    return(
+    return (
         <div>
-            <h1>Numbers of Pairs Left: {numberOfPairs - matchedPairs.length}</h1>
-            <h1>Matched Pairs: {matchedPairs}</h1>
-            { numberOfPairs - matchedPairs.length === 0 ? <h2>You Win!</h2> : null}
+            <h1>Memory Game</h1>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Enter room name"
+                    value={roomName}
+                    onChange={(e) => setRoomName(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                    value={playerName}
+                    onChange={(e) => setPlayerName(e.target.value)}
+                />
+                <button onClick={handleCreateRoom}>Create Room</button>
+                <button onClick={handleJoinRoom}>Join Room</button>
+            </div>
+
             <div className="card-grid">
-                {shuffledArray.map((value, index) => (
-                    <div>
-                        <Card key={index} 
-                            id={value} 
-                            value={value}
-                            isClicked={flippedCards.includes(index)}
-                            onClickF={() => handleClick(index)}
-                            matched={matchedPairs.includes(value)} />
-                    </div>
-                ))
-
-            }
-
+                {gameState && gameState.shuffledArray.map((value, index) => (
+                    <Card
+                        key={index}
+                        id={value}
+                        value={value}
+                        isClicked={flippedCards.includes(index)}
+                        onClickF={() => handleFlipCard(index)}
+                        matched={matchedPairs.includes(value)}
+                    />
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default GamePlay;
