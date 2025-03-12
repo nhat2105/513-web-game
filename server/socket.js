@@ -104,6 +104,17 @@ io.on('connection', (socket) => {
                 if (game.shuffledArray[firstIndex] === game.shuffledArray[secondIndex]) {
                     game.matchedPairs.push(game.shuffledArray[firstIndex]);
                     io.to(roomName).emit('message', 'Cards match!');
+                    const player = game.players.find(p => p.username === playerName);
+                    player.score++;
+                    io.to(roomName).emit('message', 'Points = ' + player.score);
+                    game.count--;
+                    io.to(roomName).emit('message', "Pairs left: = " + game.count) 
+                    
+                    if (game.count == 0){
+                        const players = game.players;
+                        players.sort((a, b) => b.score - a.score);
+                        io.to(roomName).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
+                    }
                 } else {
                     io.to(roomName).emit('message', 'Cards do not match.');
                 }
@@ -120,10 +131,6 @@ io.on('connection', (socket) => {
         }        
     });
     
-    socket.on('game_over', (players) => {
-        players.sort((a, b) => b.score - a.score);
-        io.to(roomName).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
-    });
     
     
     // Handle player disconnection
