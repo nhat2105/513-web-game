@@ -11,23 +11,24 @@ class Games {
             room: roomName,
             difficulty: difficulty,
             count: count,
-            players: [],
+            players: [], 
             shuffledArray: [],
             matchedPairs: [],
             flippedCards: [],
-            active: false, // Set to true when game starts
+            active: false, // Game starts when 2+ players join
+            currentTurnIndex: 0, // Tracks whose turn it is
         };
-
         this.games.push(game);
         return game;
     }
-
+    
     // Add a player to the game
     addPlayer(username, room, hostID) {
         let player = {
             username: username,
             roomName: room,
             roomID: hostID,
+            player_turn: 0,
             score: 0,
         };
 
@@ -36,6 +37,7 @@ class Games {
         let game = this.games.find((game) => game.room === room);
         if (game) {
             game.players.push(player);
+            player.player_turn = game.players.length - 1;
             return player;
         } else {
             return { error: "Room not found" };

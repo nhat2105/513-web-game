@@ -8,27 +8,42 @@ const GamePlay = () => {
     const [roomName, setRoomName] = useState('');
     const [playerName, setPlayerName] = useState('');
     const [gameState, setGameState] = useState(null);
+    const [canClick, setCanClick] = useState(false); // Track whether the player can click
+    const enableClicking = () => setCanClick(true);
+    const disableClicking = () => setCanClick(false);
 
     useEffect(() => {
+        // socket.on('player_index', (index) => {
+        //     setPlayerIndex(index);
+        // });
+    
         socket.on('game_state', (game) => {
-            // Update the game state with the latest data from the backend
             setGameState(game);
-            setFlippedCards(game.flippedCards); // Update flipped cards state
-            setMatchedPairs(game.matchedPairs); // Update matched pairs state
+            setFlippedCards(game.flippedCards);
+            setMatchedPairs(game.matchedPairs);
+    
+            // Check if the current player's username matches the one whose turn it is
+            const currentPlayer = game.players[game.currentTurnIndex];
+            if (currentPlayer && currentPlayer.username === playerName) {
+                enableClicking();
+            } else {
+                disableClicking();
+            }
         });
-
+    
         socket.on('message', (message) => {
             console.log(message);
         });
-
+    
         return () => {
             socket.off('game_state');
             socket.off('message');
+            socket.off('player_index');
         };
-    }, []);
-
+    }, [playerName]); // Depend on playerName instead of playerIndex
+    
     const handleCreateRoom = () => {
-        socket.emit('create_room', { roomName, difficulty: 'easy', count: 8 });
+        socket.emit('create_room', { roomName, difficulty: 'easy', count: 8, playerName});
     };
 
     const handleJoinRoom = () => {
@@ -36,10 +51,13 @@ const GamePlay = () => {
     };
 
     const handleFlipCard = (index) => {
-        if (flippedCards.length < 2 && !flippedCards.includes(index)) {
-            setFlippedCards((prev) => [...prev, index]);
-            socket.emit('flip_card', { roomName, index });
-        }
+        if (!gameState || flippedCards.length >= 2 || !canClick || flippedCards.includes(index)) return;
+
+        setFlippedCards((prev) => [...prev, index]); // Show card immediately
+        socket.emit('flip_card', { roomName, index, playerName });
+
+        // Reset flipped cards after 1 second if they don't match
+        setFlippedCards([]);
     };
 
     return (
