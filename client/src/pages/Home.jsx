@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-// import { guestLogin } from '../axios/authService';
+import { guestLogin } from '../axios/api';
 
 const HomePage = () => {
   const navigate = useNavigate(); // useNavigate hook for routing
@@ -11,11 +11,11 @@ const HomePage = () => {
     setLoading(true);
 
     try {
-      // const response = await guestLogin(); // Call the backend for guest token
-      // const { token, role } = response.data;
+      const response = await guestLogin(); // Call the backend for guest token
+      const { token, role } = response.data;
 
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('role', role); // Store the guest role
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role); // Store the guest role
 
       setLoading(false);
       navigate('/game'); // Redirect to the game page after login

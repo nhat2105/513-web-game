@@ -11,7 +11,7 @@ async function loginUser(username, password) {
       throw new Error('Invalid username');
     }
 
-    console.log("USER FETCH: ", user)
+    // console.log("USER FETCH: ", user)
 
     const isMatch = await bcrypt.compare(password, user.password);
     // console.log(user.password)
@@ -30,7 +30,7 @@ async function loginUser(username, password) {
 }
 
 async function authenticateSocket(socket, next) {
-  const token = socket.handshake.query.token; 
+  const token = socket.handshake.auth?.token; 
 
   if (!token) {
     return next(new Error('Authentication error'));

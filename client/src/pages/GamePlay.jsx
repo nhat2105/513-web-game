@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { socket } from "../socket/index";
+import { initializeSocket } from "../socket";
 import Card from "../components/Card";
 
 const GamePlay = () => {
@@ -8,55 +8,57 @@ const GamePlay = () => {
     const [roomName, setRoomName] = useState('');
     const [playerName, setPlayerName] = useState('');
     const [gameState, setGameState] = useState(null);
-    const [canClick, setCanClick] = useState(false); // Track whether the player can click
-    const enableClicking = () => setCanClick(true);
-    const disableClicking = () => setCanClick(false);
+    const [canClick, setCanClick] = useState(false);
 
     useEffect(() => {
-        // socket.on('player_index', (index) => {
-        //     setPlayerIndex(index);
-        // });
-    
-        socket.on('game_state', (game) => {
-            setGameState(game);
-            setFlippedCards(game.flippedCards);
-            setMatchedPairs(game.matchedPairs);
-    
-            // Check if the current player's username matches the one whose turn it is
-            const currentPlayer = game.players[game.currentTurnIndex];
-            if (currentPlayer && currentPlayer.username === playerName) {
-                enableClicking();
-            } else {
-                disableClicking();
-            }
-        });
-    
-        socket.on('message', (message) => {
-            console.log(message);
-        });
-    
-        return () => {
-            socket.off('game_state');
-            socket.off('message');
-            socket.off('player_index');
-        };
-    }, [playerName]); // Depend on playerName instead of playerIndex
-    
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            const socket = initializeSocket(); 
+
+            socket.connect(); // Connect only when token is available
+
+            socket.on('game_state', (game) => {
+                setGameState(game);
+                setFlippedCards(game.flippedCards);
+                setMatchedPairs(game.matchedPairs);
+
+                const currentPlayer = game.players[game.currentTurnIndex];
+                if (currentPlayer && currentPlayer.username === playerName) {
+                    setCanClick(true);
+                } else {
+                    setCanClick(false);
+                }
+            });
+
+            socket.on('message', (message) => {
+                console.log(message);
+            });
+
+            return () => {
+                socket.off('game_state');
+                socket.off('message');
+            };
+        }
+    }, [playerName]);
+
     const handleCreateRoom = () => {
-        socket.emit('create_room', { roomName, difficulty: 'easy', count: 8, playerName});
+        const socket = initializeSocket();
+        socket.emit('create_room', { roomName, difficulty: 'easy', count: 8, playerName });
     };
 
     const handleJoinRoom = () => {
+        const socket = initializeSocket();
         socket.emit('join_room', { username: playerName, roomName });
     };
 
     const handleFlipCard = (index) => {
         if (!gameState || flippedCards.length >= 2 || !canClick || flippedCards.includes(index)) return;
 
-        setFlippedCards((prev) => [...prev, index]); // Show card immediately
+        setFlippedCards((prev) => [...prev, index]); 
+        const socket = initializeSocket();
         socket.emit('flip_card', { roomName, index, playerName });
 
-        // Reset flipped cards after 1 second if they don't match
         setFlippedCards([]);
     };
 

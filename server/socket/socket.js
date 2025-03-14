@@ -3,7 +3,7 @@ const http = require('http');
 const cors = require('cors');
 const socketIo = require('socket.io');
 const routes = require('../routes/index');
-const { authenticateSocket } = require("../controllers/authController"); 
+const { authenticateSocket } = require("../controllers/authController")
 
 const app = express();
 
@@ -15,12 +15,11 @@ const server = http.createServer(app);
 
 const io = socketIo(server, {
   cors: {
-    origin: "*", 
+    origin: "*",
   }
 });
 
-
-io.use(authenticateSocket); 
+// io.use(authenticateSocket);
 
 const { Games } = require('./Games');
 const games = new Games();
