@@ -1,16 +1,33 @@
-const { Games } = require('./utils');
-const server = require('http').createServer();
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const socketIo = require('socket.io');
+const routes = require('../routes/index');
+const { authenticateSocket } = require("../controllers/authController"); 
 
-const io = require('socket.io')(server, {
-    cors: {
-        origin: "*", 
-    }
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use('/', routes);
+
+const server = http.createServer(app);
+
+const io = socketIo(server, {
+  cors: {
+    origin: "*", 
+  }
 });
 
+
+io.use(authenticateSocket); 
+
+const { Games } = require('./Games');
 const games = new Games();
 
 io.on('connection', (socket) => {
     console.log('A user connected: ' + socket.id);
+    // console.log('Authenticated user: ', socket.user.username); //
 
     // Handle room creation
     socket.on("create_room", ({ roomName, difficulty, count, playerName }) => {
