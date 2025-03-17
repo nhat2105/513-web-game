@@ -2,9 +2,9 @@ import React from "react";
 
 const Join = () =>{
     return(
-        <div>
+        <body>
             Join Page
-        </div>
+        </body>
     )
 }
 

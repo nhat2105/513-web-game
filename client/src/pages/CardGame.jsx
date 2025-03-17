@@ -2,8 +2,8 @@ import React from 'react'
 
 const CardGame = () => {
   return(
-    <div>
-    </div>
+    <body>
+    </body>
   )
 }
 

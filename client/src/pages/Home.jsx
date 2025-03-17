@@ -2,7 +2,7 @@ import React from 'react'
 
 const Home = () => {
   return(
-    <div>
+    <body>
       <br/>
       <div class = "home-login-button">
         <a href = "/login" id = "input-button">Login</a>
@@ -17,7 +17,7 @@ const Home = () => {
         <a>Rules</a>
       </div>
     
-    </div>
+    </body>
   )
 }
 

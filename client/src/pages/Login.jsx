@@ -2,7 +2,7 @@ import React from "react";
 
 const Login = () =>{
     return(
-        <div>
+        <body>
             <p>Username</p>
             <input type="text"/>
             <p>Password</p>
@@ -10,7 +10,7 @@ const Login = () =>{
             <br/>
             <button>Login</button>
             <a href = "/register">create an account</a>
-        </div>
+        </body>
     )
 }
 
