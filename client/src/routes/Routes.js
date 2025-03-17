@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Create from "../pages/Create";
 import Join from "../pages/Join";
 import Register from "../pages/Register";
-import CardGame from "../pages/CardGame";
+import GameBoard from "../pages/GameBoard";
 
 const Routes = () => {
     return(
@@ -16,7 +16,7 @@ const Routes = () => {
             <Route path='/create' element={<Create />} />
             <Route path='/join' element={<Join />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/game' element={<CardGame />} />
+            <Route path='/game' element={<GameBoard />} />
             
         </RoutesWrapper>
     )

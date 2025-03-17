@@ -1,4 +1,6 @@
 @import url("./pages/Home.css");
 @import url("./pages/Login.css");
-@import url("./pages/CardGame.css");
+@import url("./pages/GameBoard.css");
 @import url("./pages/UniversalElements.css");
+
+@import url("./components/CardGame.css");
