@@ -45,7 +45,6 @@ io.on('connection', (socket) => {
         // Join the room and notify everyone in the room about the creation
         socket.join(roomName);
         io.to(roomName).emit('message', `Room ${roomName} created by ${playerName}`);
-        io.to(roomName).emit('game_state', game); // Send the initial game state to the room
         console.log(`Room ${roomName} created by ${playerName}`);
 
         let player = {
@@ -59,7 +58,7 @@ io.on('connection', (socket) => {
         game.players.push(player);
 
         console.log("JUST PUSHED PLAYER INDEX: ", player.player_turn);
-        io.to(roomName).emit("player_index", player.player_turn);    
+        io.to(roomName).emit('game_state', game); // Send the initial game state to the room 
     });
 
     // Player joins a room
@@ -101,15 +100,19 @@ io.on('connection', (socket) => {
 
         const game = games.getGame(roomName);
         if (!game) return;
-    
-        const playerIndex = game.players.findIndex(player => player.username === playerName);
         
-        if (game.currentTurnIndex !== playerIndex) {
-            io.to(roomName).emit('message', 'It\'s not your turn!');
-            return;
+    
+        // const playerIndex = game.players.findIndex(player => player.username === playerName);
+        
+        if (game.players.length > 1) {
+            const playerIndex = game.players.findIndex(player => player.username === playerName);
+        
+            if (game.currentTurnIndex !== playerIndex) {
+                io.to(roomName).emit('message', 'It\'s not your turn!');
+                return;
+            }
         }
 
-    
         // Add flipped card to flippedCards array
         if (game.flippedCards.length < 2) {
             game.flippedCards.push(index);
@@ -134,11 +137,15 @@ io.on('connection', (socket) => {
                 } else {
                     io.to(roomName).emit('message', 'Cards do not match.');
                 }
+
+                if (games.players.length > 1)game.currentTurnIndex++;
             
                 // Wait 1 second before resetting flipped cards and switching turn
                 setTimeout(() => {
                     game.flippedCards = [];
-                    game.currentTurnIndex = (game.currentTurnIndex + 1) % game.players.length;
+                    if (game.players.length > 1) {
+                        game.currentTurnIndex = (game.currentTurnIndex + 1) % game.players.length;  // Rotate turns for multiplayer
+                    }
                     io.to(roomName).emit('game_state', game); // Update clients after delay
                 }, 1000);
             } else {

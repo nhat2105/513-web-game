@@ -26,6 +26,7 @@ const GamePlay = () => {
                 const currentPlayer = game.players[game.currentTurnIndex];
                 if (currentPlayer && currentPlayer.username === playerName) {
                     setCanClick(true);
+                    // console.log("YEAH SHOULD BE TRUE ON FIRST GUEST")
                 } else {
                     setCanClick(false);
                 }

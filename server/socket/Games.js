@@ -15,7 +15,6 @@ class Games {
             shuffledArray: [],
             matchedPairs: [],
             flippedCards: [],
-            active: false, // Game starts when 2+ players join
             currentTurnIndex: 0, // Tracks whose turn it is
         };
         this.games.push(game);
