@@ -7,7 +7,7 @@
 
 .gameboard-cardgame {
     display: flex;
-    background-color: rgb(30, 42, 80);
+    background-color: rgb(38, 39, 51);
     width: 70vw;
     height: 100vh;
     margin: 0;
@@ -17,8 +17,10 @@
 }
 
 .gameboard-userboard {
-    display: flex;
-    background-color: yellow;
+    display: grid;
+    background-color: rgb(32, 32, 43);
     width: 30vw;
     height: 100vh;
+    align-items: center;
+    justify-content: center;
 }

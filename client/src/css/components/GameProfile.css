@@ -1,0 +1,30 @@
+.gameProfile-body {
+    display: flex;
+    height: 15vh;
+    width: 27vw;
+    background-color: rgb(75, 163, 75);
+    color: white;
+    border-radius: 20px;
+    font-family: sans-serif;
+    align-items: center;
+}
+
+.gameProfile-userIcon {
+    height: 70px;
+    width: 70px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 25%;
+}
+
+.gameProfile-userInfo {
+    height: 70px;
+    width: 74%;
+    /* background-color: rgb(123, 39, 39); */
+    align-items: center;
+}
+
+#gameProfile-words {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
