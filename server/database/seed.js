@@ -1,6 +1,5 @@
 const { hashPassword } = require('../utils/hashUtils');
 const db = require('./db');
-const userModel = require('../models/userModel')
 
 async function seedDatabase() {
   const client = await db.connectToDatabase();
@@ -11,7 +10,8 @@ async function seedDatabase() {
         id SERIAL PRIMARY KEY,
         username VARCHAR(50) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
-        role VARCHAR(20) NOT NULL
+        role VARCHAR(20) NOT NULL,
+        points INT DEFAULT 0
       );
     `);
 
@@ -24,10 +24,10 @@ async function seedDatabase() {
 
     // Use parameterized queries to insert the users
     await client.query(`
-      INSERT INTO users (username, password, role)
+      INSERT INTO users (username, password, role, points)
       VALUES
-        ($1, $2, $3),
-        ($4, $5, $6)
+        ($1, $2, $3, 0),
+        ($4, $5, $6, 0)
       ON CONFLICT (username) DO NOTHING;
     `, ['admin', adminPass, 'admin', 'player1', userPass, 'user']); 
 

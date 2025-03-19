@@ -5,6 +5,8 @@ const socketIo = require('socket.io');
 const routes = require('../routes/index');
 const { authenticateSocket } = require("../controllers/authController")
 
+const { getUserByUsername, updateUserPoints } = require("../models/userModel")
+
 const app = express();
 
 app.use(cors());
@@ -128,11 +130,21 @@ io.on('connection', (socket) => {
                     io.to(roomName).emit('message', 'Points = ' + player.score);
                     game.count--;
                     io.to(roomName).emit('message', "Pairs left: = " + game.count) 
-                    
+                                        
                     if (game.count == 0){
                         const players = game.players;
                         players.sort((a, b) => b.score - a.score);
                         io.to(roomName).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
+
+                        // Update players points based on the number of pairs they've matched
+                        for (let i = 0; i < players.length; i++){
+                            var username = players[i].username;
+                            var user = getUserByUsername(username);
+                            if (user){ // Only updates if user exists
+                                updateUserPoints(username, players[i].score);
+                            }
+                        }
+                       
                     }
                 } else {
                     io.to(roomName).emit('message', 'Cards do not match.');
@@ -153,8 +165,6 @@ io.on('connection', (socket) => {
             }            
         }        
     });
-    
-    
     
     // Handle player disconnection
     socket.on('disconnect', () => {

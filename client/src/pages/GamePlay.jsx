@@ -9,6 +9,7 @@ const GamePlay = () => {
     const [playerName, setPlayerName] = useState('');
     const [gameState, setGameState] = useState(null);
     const [canClick, setCanClick] = useState(false);
+    //TODO: too see if it's a guest mode or not
 
     useEffect(() => {
         const token = localStorage.getItem("token");
