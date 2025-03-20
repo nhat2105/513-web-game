@@ -1,0 +1,26 @@
+.gameboard-game-page {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+.gameboard-cardgame {
+    display: flex;
+    background-color: rgb(38, 39, 51);
+    width: 70vw;
+    height: 100vh;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.gameboard-userboard {
+    display: grid;
+    background-color: rgb(32, 32, 43);
+    width: 30vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}

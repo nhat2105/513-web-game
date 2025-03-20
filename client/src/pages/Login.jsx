@@ -2,11 +2,20 @@ import React, { useState } from 'react';
 import { login } from '../axios/api';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+
+const Login = () =>{
+    return(
+        <body>
+            <p>Username</p>
+            <input type="text"/>
+            <p>Password</p>
+            <input type="text"/>
+            <br/>
+            <button>Login</button>
+            <a href = "/register">create an account</a>
+        </body>
+    )
+}
 
   const handleLogin = async (e) => {
     e.preventDefault();

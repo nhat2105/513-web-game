@@ -1,0 +1,30 @@
+.home-title {
+    font-family: 'Calibri', sans-serif;
+    font-size: 50px;
+}
+
+.home-subtitle {
+    font-family: 'Calibri', sans-serif;
+    font-size: 20px;
+}
+
+.home-buttons-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: yellow; */
+    height: 30vh;
+    padding: 10px;
+}
+
+.home-introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-login-button {
+    display: flex;
+    justify-content: right;
+}

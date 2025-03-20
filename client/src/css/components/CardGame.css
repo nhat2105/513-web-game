@@ -1,0 +1,46 @@
+.cardgame-display {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    gap: 10px;
+    margin: 1em 0;
+    font-family: "ubuntu mono";
+    font-size: xx-large;
+  }
+  
+.cardgame-card {
+  background-color: rgb(3, 29, 48);
+  border: 1px solid black;
+  width: 150px;
+  height: 200px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: all linear 0.3s;
+  transform: rotate3d(0, 1, 0, 180deg);
+  position: relative;
+  overflow: hidden;
+}
+
+.cardgame-card:hover {
+  cursor: pointer;
+  transform: rotate3d(0, 1, 0, 180deg) translate(-2px,-2px);
+}
+
+.cardgame-card-back {
+  background-color: rgb(3, 29, 48);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.cardgame-card.cardgame-flipped {
+  transform: unset;
+  transform-style: preserve-3d;
+}
+
+.cardgame-flipped .cardgame-card-back {
+  transform: rotate3d(0, 1, 0, 180deg);
+}
