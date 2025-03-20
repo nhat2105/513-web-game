@@ -1,5 +1,6 @@
-import React from 'react'
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
+// import { guestLogin } from '../axios/api';
 const Home = () => {
   return(
     <body>
@@ -21,4 +22,5 @@ const Home = () => {
   )
 }
 
-export default Home
+
+export default HomePage;
