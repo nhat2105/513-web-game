@@ -1,8 +1,12 @@
 import React from 'react'
+import DaRules from '../components/DaRules'
 
 const Home = () => {
+  const [showRules, setShowRules] = React.useState(false);
+  const toggleRules = () => setShowRules(!showRules);
   return(
     <body>
+      {<DaRules showRules = {showRules} setShowRules={setShowRules}/>}
       <br/>
       <div class = "home-login-button">
         <a href = "/login" id = "input-button">Login</a>
@@ -15,7 +19,7 @@ const Home = () => {
       <div class = "home-buttons-list">
         <a href = "/create" id = "input-button">Create Game</a>
         <a href = "/join" id = "input-button">Join Game</a>
-        <a id = "rules-button">Rules</a>
+        <a id = "rules-button" onClick={toggleRules}>Rules</a>
       </div>
     
     </body>

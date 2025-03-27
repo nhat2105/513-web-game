@@ -1,8 +1,11 @@
+/* Pages */
 @import url("./pages/Home.css");
 @import url("./pages/Login.css");
 @import url("./pages/MultiplayerGameBoard.css");
 @import url("./pages/SinglePlayerGameBoard.css");
 @import url("./pages/UniversalElements.css");
 
+/* Components */
 @import url("./components/CardGame.css");
 @import url("./components/GameProfile.css");
+@import url("./components/DaRules.css");
