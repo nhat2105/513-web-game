@@ -11,9 +11,9 @@ const Login = () =>{
    const handleLogin = async (e) => {
       e.preventDefault();
       try {
-        const data = await login(username, password);
-        localStorage.setItem('token', data.token);
-        navigate('/game'); // Navigate to the home page after login
+        await login(username, password);
+        localStorage.setItem('loggedIn', "true");
+        navigate('/'); // Navigate to the home page after login
       } catch (err) {
         setError('Login failed');
       }

@@ -10,7 +10,6 @@ import MultiplayerGameBoard from "../pages/MultiplayerGameBoard";
 import SinglePlayerGameBoard from "../pages/SinglePlayerGameBoard";
 
 const Routes = () => {
-    
     return(
         <RoutesWrapper>
             <Route path='/' element={<Home />} />
