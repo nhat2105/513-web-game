@@ -14,7 +14,7 @@ const Routes = () => {
     return(
         <RoutesWrapper>
             <Route path='/' element={<Home />} />
-            <Route path='/game' element={<GamePlay/>} />
+            {/* <Route path='/game' element={<GamePlay/>} /> */}
             <Route path='/login' element={<Login />} />
             <Route path='/create' element={<Create />} />
             <Route path='/join' element={<Join />} />
