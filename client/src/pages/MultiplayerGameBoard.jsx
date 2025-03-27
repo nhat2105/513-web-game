@@ -3,7 +3,7 @@ import React from 'react';
 import CardGame from '../components/CardGame';
 import GameProfile from '../components/GameProfile';
 
-const GameBoard = () => {
+const MultiplayerGameBoard = () => {
     return (
         <body>
           <div className='gameboard-game-page'>
@@ -22,4 +22,4 @@ const GameBoard = () => {
     );
 };
 
-export default GameBoard
+export default MultiplayerGameBoard;
