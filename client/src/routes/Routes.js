@@ -6,7 +6,8 @@ import Login from "../pages/Login";
 import Create from "../pages/Create";
 import Join from "../pages/Join";
 import Register from "../pages/Register";
-import GameBoard from "../pages/GameBoard";
+import MultiplayerGameBoard from "../pages/MultiplayerGameBoard";
+import SinglePlayerGameBoard from "../pages/SinglePlayerGameBoard";
 
 const Routes = () => {
     return(
@@ -16,7 +17,8 @@ const Routes = () => {
             <Route path='/create' element={<Create />} />
             <Route path='/join' element={<Join />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/game' element={<GameBoard />} />
+            <Route path='/Mgame' element={<MultiplayerGameBoard />} />
+            <Route path='/Sgame' element={<SinglePlayerGameBoard />} />
             
         </RoutesWrapper>
     )

@@ -28,3 +28,12 @@
     display: flex;
     justify-content: right;
 }
+
+.home-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 15%;
+    max-height: 15%;
+    padding: 15px;
+}

@@ -1,6 +1,6 @@
 import {useState, useRef} from 'react';
 
-const values = ["♠", "♣", "♥", "♦", "🃏"];
+const values = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",];
 
 //create a deck of cards and shuffle them
 const deck = ([...values, ...values].sort(() => 0.5 - Math.random()));
