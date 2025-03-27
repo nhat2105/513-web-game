@@ -13,9 +13,10 @@ export const login = async (username, password) => {
   }
 };
 
-export const register = async (username, password, role) => {
+export const register = async (username, password) => {
   try {
-    const response = await api.post('/register', { username, password, role });
+    const response = await api.post('/register', { username, password});
+    console.log("CONGRATS BITCH YOU'RE IN: ", response.data);
     return response.data;
   } catch (error) {
     throw new Error('Registration failed');

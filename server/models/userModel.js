@@ -1,4 +1,27 @@
 const { connectToDatabase } = require("../database/db")
+const { hashPassword } = require('../utils/hashUtils');
+
+
+async function registerNewUser(username, password){
+  const client = await connectToDatabase();
+  try{
+    await client.query("SELECT * FROM users WHERE username = $1", [username]);
+
+    const hashedPass = await hashPassword(password);
+
+    const result = await client.query(
+      "INSERT INTO users (username, password, role, points) VALUES($1, $2, $3, 0);",
+      [username, hashedPass, 'user']);
+
+    //console.log(result.rows[0]);
+    return result.rows[0];
+  } catch (err) {
+    throw new Error("Username taken");
+  } finally {
+    await client.end();
+  }
+}
+
 
 // Query for user login by username
 async function getUserByUsername(username) {
@@ -34,5 +57,6 @@ async function updateUserPoints(username, additionalPoints) {
 
 module.exports = {
   getUserByUsername,
-  updateUserPoints
+  updateUserPoints,
+  registerNewUser
 };

@@ -5,10 +5,11 @@ const router = express.Router();
 
 // Register route
 router.post('/register', async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username, password} = req.body;
   try {
-    await authController.registerUser(username, password, role);
+    await authController.registerUser(username, password);
     res.status(201).json({ message: 'User registered successfully' });
+    console.log("WELCOME BITCH")
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

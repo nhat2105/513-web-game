@@ -2,6 +2,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel');
 
+async function registerUser(username, password){
+  try{
+    const user = await userModel.registerNewUser(username, password);
+
+    if (user){
+      console.log("Error: cannot register with this name")
+    }
+  } catch{
+    throw new Error('Register failed: ' + err.message);
+  }
+}
+
 async function loginUser(username, password) {
   try {
     const user = await userModel.getUserByUsername(username);
@@ -45,4 +57,4 @@ async function authenticateSocket(socket, next) {
   }
 }
 
-module.exports = { loginUser, authenticateSocket };
+module.exports = { loginUser, authenticateSocket, registerUser };
