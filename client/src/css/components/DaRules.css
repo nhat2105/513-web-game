@@ -18,3 +18,8 @@
     padding: 20px;
     font-family: 'Calibri', sans-serif;
 }
+
+.rules-button {
+    position: absolute;
+    left: 50vw;
+}

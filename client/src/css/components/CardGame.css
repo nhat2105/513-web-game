@@ -9,7 +9,7 @@
   }
   
 .cardgame-card {
-  background-color: rgb(201, 64, 64);
+  background-color: rgb(255, 255, 255);
   border: 4px solid rgb(236, 236, 236);
   box-sizing: border-box;
   width: 75px;
@@ -22,6 +22,7 @@
   transform: rotate3d(0, 1, 0, 180deg);
   position: relative;
   overflow: hidden;
+  color: black;
 }
 
 .cardgame-card:hover {

@@ -6,7 +6,7 @@ const DaRules = ({showRules, setShowRules}) => {
     return (
         <body className="rules-background">
             <div className="rules-container">
-                <button onClick={toggleRules}>X</button>
+                <button className="rules-button" onClick={toggleRules}>X</button>
                 <h1>Rules</h1>
                 <div>
                     <h2>SinglePlayer</h2>

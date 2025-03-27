@@ -17,6 +17,7 @@ const Home = () => {
         <img class = "home-logo" src='../513-cardlogo.png'/>
       </div>
       <div class = "home-buttons-list">
+      <a href = "/Sgame" id = "input-button">Singleplayer</a>
         <a href = "/create" id = "input-button">Create Game</a>
         <a href = "/join" id = "input-button">Join Game</a>
         <a id = "rules-button" onClick={toggleRules}>Rules</a>
