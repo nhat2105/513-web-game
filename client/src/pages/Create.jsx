@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from '../components/Dropdown';
+import { initializeSocket } from '../socket';
 
 const Create = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState('');
   const [cards, setCards] = useState('');
   const [background, setBackground] = useState('');
+  const [error, setError] = useState('');
+  
 
   const handlePlayersSelect = (option) => {
     setPlayers(option);
@@ -20,8 +23,15 @@ const Create = () => {
     setBackground(option);
   };
 
-  const redirectMGame = () => {
-    navigate("/mgame");
+  const createMGame = () => {
+    if (players === ''){
+      setError("Please select players.");
+    } else if (cards === ""){
+      setError("Please select number of cards.");
+    } else if (background === ""){
+      setError("Please select background colors.")
+    } 
+    else navigate("/mgame");
   };
 
   return (
@@ -60,7 +70,7 @@ const Create = () => {
 
         <div style={{justifySelf: 'center', marginBottom: 10}}>
           <button
-            onClick={redirectMGame}
+            onClick={createMGame}
             type="button"
             style={{
               padding: '10px 20px',
@@ -77,6 +87,7 @@ const Create = () => {
             Host New Game
           </button>
         </div>
+            {error !== "" && <p style={{color: 'red'}}>{error}</p>}
         </div>
       </div>
     </div>
