@@ -13,6 +13,8 @@ const Login = () =>{
       try {
         await login(username, password);
         localStorage.setItem('loggedIn', "true");
+        console.log("USERNAME", username)
+        localStorage.setItem("username", username);
         navigate('/'); // Navigate to the home page after login
       } catch (err) {
         setError('Login failed');

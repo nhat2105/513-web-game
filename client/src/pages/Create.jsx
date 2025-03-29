@@ -9,6 +9,7 @@ const Create = () => {
   const [cards, setCards] = useState('');
   const [background, setBackground] = useState('');
   const [error, setError] = useState('');
+  const [roomName, setRoomName] = useState("");
   
 
   const handlePlayersSelect = (option) => {
@@ -30,8 +31,17 @@ const Create = () => {
       setError("Please select number of cards.");
     } else if (background === ""){
       setError("Please select background colors.")
-    } 
-    else navigate("/mgame");
+    } else if (roomName === ""){
+      setError("Please enter a room name");
+    }
+    else {
+      const socket = initializeSocket();
+      var username = localStorage.getItem('username');
+      //console.log("USERNAME: ", username)
+      socket.emit('create_room', { roomName, difficulty: 'easy', count: 15, playerName: username });
+
+      navigate("/mgame");
+    }
   };
 
   return (
@@ -42,6 +52,7 @@ const Create = () => {
         src='../513-cardlogo.png'
         alt="logo"
       />
+      
       <div className="home-introduction">
         <h1 className="home-title">Welcome to Card Pairs</h1>
         <p className="home-subtitle">A game of memory</p>
@@ -68,6 +79,15 @@ const Create = () => {
             onSelect={handleBackgroundSelect}
           />
 
+          <h3>Enter Room Name</h3>
+          <input
+            type="text"
+            placeholder="Room Name"
+            value={roomName}
+            onChange={(e) => setRoomName(e.target.value)}
+            style={{fontFamily: 'sans-serif', width: 300, padding: '8px', fontSize:15, marginBottom: '12px', borderRadius: '4px', 
+              border: '1px solid lightgray' }}
+          />  
         <div style={{justifySelf: 'center', marginBottom: 10}}>
           <button
             onClick={createMGame}

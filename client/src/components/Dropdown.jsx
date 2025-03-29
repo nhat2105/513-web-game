@@ -19,7 +19,7 @@ const Dropdown = ({ label, options, onSelect }) => {
   }, []);
 
   return (
-    <div ref={dropdownRef} style={{ position: 'relative', marginBottom: '15px' }}>
+    <div ref={dropdownRef} style={{ fontFamily: 'sans-serif', position: 'relative', marginBottom: '15px' }}>
       <div
         onClick={toggleDropdown}
         style={{

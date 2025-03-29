@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
 
         // Create a new game room
         const game = games.addGame(socket.id, roomName, difficulty, count);
-        games.shuffleArray(game.shuffledArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']);
+        games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
 
         // Join the room and notify everyone in the room about the creation
         socket.join(roomName);
