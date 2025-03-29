@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from '../components/Dropdown';
 import { initializeSocket } from '../socket';
@@ -10,6 +10,7 @@ const Create = () => {
   const [background, setBackground] = useState('');
   const [error, setError] = useState('');
   const [roomName, setRoomName] = useState("");
+  const socket = initializeSocket();
   
 
   const handlePlayersSelect = (option) => {
@@ -24,6 +25,17 @@ const Create = () => {
     setBackground(option);
   };
 
+  useEffect(() => {
+    socket.on("create_room_error", (msg) => {
+      setError(msg);
+    })
+
+    socket.on("create_room_done", (msg) => {
+      setError("");
+      navigate("/mgame");
+    })
+  })
+
   const createMGame = () => {
     if (players === ''){
       setError("Please select players.");
@@ -35,12 +47,8 @@ const Create = () => {
       setError("Please enter a room name");
     }
     else {
-      const socket = initializeSocket();
       var username = localStorage.getItem('username');
-      //console.log("USERNAME: ", username)
       socket.emit('create_room', { roomName, difficulty: 'easy', count: 15, playerName: username });
-
-      navigate("/mgame");
     }
   };
 

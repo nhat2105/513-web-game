@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
 
         // Check if the room already exists
         if (!games.checkRoomName(roomName)) {
-            socket.emit('error', 'Room already exists!');
+            socket.emit('create_room_error', 'Room already exists!'); 
             return;
         }
 
@@ -48,6 +48,7 @@ io.on('connection', (socket) => {
         socket.join(roomName);
         io.to(roomName).emit('message', `Room ${roomName} created by ${playerName}`);
         console.log(`Room ${roomName} created by ${playerName}`);
+        socket.emit("create_room_done", `Create room ${roomName} successfully`)
 
         let player = {
             username: playerName,
@@ -68,12 +69,15 @@ io.on('connection', (socket) => {
         const game = games.getGame(roomName);
         
         if (!game) {
-            socket.emit('error', 'Room not found!');
+            //console.log("joinroom error logged")
+            socket.emit('join_room_error', 'Room not found!');
             return;
         }
     
         // Add player to the game
         const player = games.addPlayer(username, roomName, game.host);
+        socket.emit('join_room_done', 'Joined room successfully.');
+
         socket.join(roomName);
         io.to(roomName).emit('message', `${username} joined room ${roomName}`);
         
