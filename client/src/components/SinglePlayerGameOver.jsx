@@ -1,6 +1,6 @@
 import React from "react";
 
-const SinglePlayerGameOver = ({ gamePoints}, {gameOverScreen, setGameOverScreen}) => {
+const SinglePlayerGameOver = ({ gamePoints}) => {
     if (gamePoints != 15) return null;
     return (
         <div className="singleplayer-gameover-background">
