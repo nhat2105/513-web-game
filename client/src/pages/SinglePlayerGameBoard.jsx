@@ -13,11 +13,14 @@ const SinglePlayerGameBoard = () => {
         if(points == 15) {
             setGameOverScreen(true);
         }
+        else {
+            setGameOverScreen(false);
+        }
     };
 
     return(
         <body className='singleplayer-board'> 
-        {<SinglePlayerGameOver/>}
+        {<SinglePlayerGameOver gamePoints = {gamePoints} gameOverScreen = {gameOverScreen} setGameOverScreen = {setGameOverScreen}/>}
             <div>
             <SinglePlayerCardGame gamePoints = {gamePoints} setGamePoints = {setGamePoints}/>
             </div>

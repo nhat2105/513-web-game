@@ -9,10 +9,22 @@
 
 .singleplayer-gameover-container {
     position: fixed;
-    background-color: aqua;
+    background-color: rgb(93, 132, 87);
     border-radius: 10px;
     top: 25%;
     left: 25%;
     width: 50%;
     height: 50%;
+}
+.singleplayer-gameover-format {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.singleplayer-gameover-button-position {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
 }

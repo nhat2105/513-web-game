@@ -34,3 +34,20 @@
     transition: 0.1s;
     cursor: pointer;
 }
+
+#gameover-button {
+    background-color: rgb(93, 132, 87);
+    text-decoration: none;
+    color: white;
+    font-family: 'Calibri', sans-serif;
+    padding: 6px 18px 6px 18px;
+    border-radius: 10px;
+    border: 2.5px rgb(255, 255, 255);
+    border-style: solid;    
+}
+
+#gameover-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(93, 132, 87);
+    transition: 0.1s;
+}
