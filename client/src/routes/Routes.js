@@ -18,7 +18,7 @@ const Routes = () => {
             <Route path='/create' element={<Create />} />
             <Route path='/join' element={<Join />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/Mgame' element={<MultiplayerGameBoard />} />
+            <Route path='/Mgame/:roomName' element={<MultiplayerGameBoard />} />
             <Route path='/Sgame' element={<SinglePlayerGameBoard />} />
             
         </RoutesWrapper>

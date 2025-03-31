@@ -42,13 +42,13 @@ io.on('connection', (socket) => {
 
         // Create a new game room
         const game = games.addGame(socket.id, roomName, difficulty, count);
-        games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
+        games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
+                                                "♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
 
         // Join the room and notify everyone in the room about the creation
         socket.join(roomName);
         io.to(roomName).emit('message', `Room ${roomName} created by ${playerName}`);
-        console.log(`Room ${roomName} created by ${playerName}`);
-        socket.emit("create_room_done", `Create room ${roomName} successfully`)
+        //console.log(`Room ${roomName} created by ${playerName}`);
 
         let player = {
             username: playerName,
@@ -62,6 +62,7 @@ io.on('connection', (socket) => {
 
         console.log("JUST PUSHED PLAYER INDEX: ", player.player_turn);
         io.to(roomName).emit('game_state', game); // Send the initial game state to the room 
+        socket.emit("create_room_done", `Create room ${roomName} successfully`)
     });
 
     // Player joins a room
@@ -76,16 +77,16 @@ io.on('connection', (socket) => {
     
         // Add player to the game
         const player = games.addPlayer(username, roomName, game.host);
-        socket.emit('join_room_done', 'Joined room successfully.');
-
+        
         socket.join(roomName);
         io.to(roomName).emit('message', `${username} joined room ${roomName}`);
         
         // Send updated game state to all players in the room
         io.to(roomName).emit('game_state', game);
 
-
         io.to(roomName).emit("player_index", player.player_turn);    
+        socket.emit('join_room_done', 'Joined room successfully.');
+        
         console.log("Player index = ", player.player_turn)
         console.log("NUMBER OF PLAYERS CURRENTLY: ", game.players.length)
     });

@@ -15,3 +15,7 @@
 `cd server` or `cd client`
 
 `npm start`
+
+# Docker build
+`docker-compose build`
+`docker-compose up`

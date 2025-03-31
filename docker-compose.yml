@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}  # card_pairs_game
+    ports:
+      - "5432:5432"  # Expose DB port
+    networks:
+      - my-network
+
+  backend:
+    build: ./server
+    dockerfile: Dockerfile
+    container_name: backend
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      PORT: ${PORT}
+    ports:
+      - "5000:5000" 
+    depends_on:
+      - db  # Ensure backend starts after DB
+    networks:
+      - my-network
+
+  frontend:
+    build: ./client
+    dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80" 
+    networks:
+      - my-network
+
+volumes:
+  pgdata: 
+
+networks:
+  my-network:
+    driver: bridge

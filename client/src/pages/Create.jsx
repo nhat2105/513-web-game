@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from '../components/Dropdown';
 import { initializeSocket } from '../socket';
+import { useDispatch } from 'react-redux';
+import { setGameState } from '../redux/gameSlice';
 
 const Create = () => {
   const navigate = useNavigate();
@@ -10,8 +12,10 @@ const Create = () => {
   const [background, setBackground] = useState('');
   const [error, setError] = useState('');
   const [roomName, setRoomName] = useState("");
-  const socket = initializeSocket();
+  const [intialGameState, setInitialGame] = useState(null);
   
+  const socket = initializeSocket();
+  const dispatch = useDispatch();
 
   const handlePlayersSelect = (option) => {
     setPlayers(option);
@@ -30,10 +34,17 @@ const Create = () => {
       setError(msg);
     })
 
+    socket.on("game_state", (game) => {
+      setInitialGame(game);
+      console.log("Set game: ", game)
+    })
+
     socket.on("create_room_done", (msg) => {
       setError("");
-      navigate("/mgame");
-    })
+      //console.log("inital game state before routing: ", intialGameState)
+      dispatch(setGameState(intialGameState));
+      navigate(`/mgame/${roomName}`);
+    }) 
   })
 
   const createMGame = () => {

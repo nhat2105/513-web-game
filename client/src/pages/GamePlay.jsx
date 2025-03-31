@@ -44,16 +44,6 @@ const GamePlay = () => {
         }
     }, [playerName]);
 
-    const handleCreateRoom = () => {
-        const socket = initializeSocket();
-        socket.emit('create_room', { roomName, difficulty: 'easy', count: 8, playerName });
-    };
-
-    const handleJoinRoom = () => {
-        const socket = initializeSocket();
-        socket.emit('join_room', { username: playerName, roomName });
-    };
-
     const handleFlipCard = (index) => {
         if (!gameState || flippedCards.length >= 2 || !canClick || flippedCards.includes(index)) return;
 
@@ -67,22 +57,6 @@ const GamePlay = () => {
     return (
         <div>
             <h1>Memory Game</h1>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Enter room name"
-                    value={roomName}
-                    onChange={(e) => setRoomName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Enter your name"
-                    value={playerName}
-                    onChange={(e) => setPlayerName(e.target.value)}
-                />
-                <button onClick={handleCreateRoom}>Create Room</button>
-                <button onClick={handleJoinRoom}>Join Room</button>
-            </div>
 
             <div className="card-grid">
                 {gameState && gameState.shuffledArray.map((value, index) => (

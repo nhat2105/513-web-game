@@ -17,14 +17,14 @@ const Join = () =>{
 
         socket.on("join_room_done", (msg) => {
             setError("");
-            navigate("/mgame") //Will need to have id of roomname in mgame
+            navigate(`/mgame/${roomName}`) //Will need to have id of roomname in mgame
         })
 
         return () => {
             socket.off("join_room_error");
             socket.off("join_room_done");
         };
-    }, [error, socket, navigate])
+    }, [error, socket, navigate, roomName])
 
     function handleJoinRoom(roomName){
        
