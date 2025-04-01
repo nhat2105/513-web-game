@@ -134,8 +134,8 @@ io.on('connection', (socket) => {
             if (game.flippedCards.length === 2) {
                 const [firstIndex, secondIndex] = game.flippedCards;
                 if (game.shuffledArray[firstIndex] === game.shuffledArray[secondIndex]) {
-                    game.matchedPairs.push(game.shuffledArray[firstIndex]);
-                    io.to(room).emit('message', 'Cards match!');
+                    game.matchedPairs.push(game.shuffledArray[firstIndex]); //return values matched
+                    io.to(room).emit('cards_match', game.matchedPairs);
                     const player = game.players.find(p => p.username === playerName);
                     player.score++;
                     io.to(room).emit('message', 'Points = ' + player.score);

@@ -10,7 +10,6 @@ const CardGame = ({intialGameState, roomName}) => {
   const [gameState, setGameState] = useState(intialGameState); // Game state from backend
   const [canClick, setCanClick] = useState(false); // Whether the current player can flip cards
   const playerName = localStorage.getItem("username") || "player"; 
-  const [remainingCards, setRemainingCards] = ([])
 
   useEffect(() => {
     // Connect to the socket
@@ -34,18 +33,25 @@ const CardGame = ({intialGameState, roomName}) => {
     socket.on('message', (message) => {
       console.log(message); // Handle general game messages
       // if (message === "Cards match!"){
-      //   setFlippedCards([]);
+      //   matchedPairs.push(flippedCards[0]);
+      //   matchedPairs.push(flippedCards[1]);
       // }
+    });
+
+    socket.on('cards_match', (matchedPairValues) => {
+      setMatchedPairs(matchedPairValues)
     });
 
     return () => {
       socket.off('game_state');
       socket.off('message');
+      socket.off('cards_match');
     };
-  }, [playerName, socket, canClick]);
+  }, [playerName, socket, canClick, matchedPairs, flippedCards]);
 
   const handleClick = (index, value) => {
-    //console.log("CALLED")
+    if (matchedPairs.includes(value))return; // can't click on mapped cards
+   
     if (!gameState || flippedCards.length >= 2) return;
     
     setFlippedCards((prev) => [...prev, index]); 
