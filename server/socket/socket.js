@@ -104,10 +104,15 @@ io.on('connection', (socket) => {
 
     // Player flips a card
     socket.on('flip_card', ({ roomName, index, playerName }) => {
-
-        const game = games.getGame(roomName);
-        if (!game) return;
-        
+        const room = roomName.roomName;
+        //console.log("ROOM NAME: ", room)
+        const game = games.getGame(room);
+        //console.log("games: ", games)
+       
+        if (!game) {
+            // console.log("FLIPPING... WAIT NO GAME")
+            return
+        };
     
         // const playerIndex = game.players.findIndex(player => player.username === playerName);
         
@@ -115,7 +120,7 @@ io.on('connection', (socket) => {
             const playerIndex = game.players.findIndex(player => player.username === playerName);
         
             if (game.currentTurnIndex !== playerIndex) {
-                io.to(roomName).emit('message', 'It\'s not your turn!');
+                io.to(room).emit('message', 'It\'s not your turn!');
                 return;
             }
         }
@@ -123,23 +128,24 @@ io.on('connection', (socket) => {
         // Add flipped card to flippedCards array
         if (game.flippedCards.length < 2) {
             game.flippedCards.push(index);
-            io.to(roomName).emit('game_state', game); // Broadcast updated game state to all clients in the room
+
+            io.to(room).emit('game_state', game); // Broadcast updated game state to all clients in the room
     
             if (game.flippedCards.length === 2) {
                 const [firstIndex, secondIndex] = game.flippedCards;
                 if (game.shuffledArray[firstIndex] === game.shuffledArray[secondIndex]) {
                     game.matchedPairs.push(game.shuffledArray[firstIndex]);
-                    io.to(roomName).emit('message', 'Cards match!');
+                    io.to(room).emit('message', 'Cards match!');
                     const player = game.players.find(p => p.username === playerName);
                     player.score++;
-                    io.to(roomName).emit('message', 'Points = ' + player.score);
+                    io.to(room).emit('message', 'Points = ' + player.score);
                     game.count--;
-                    io.to(roomName).emit('message', "Pairs left: = " + game.count) 
+                    io.to(room).emit('message', "Pairs left: = " + game.count) 
                                         
                     if (game.count == 0){
                         const players = game.players;
                         players.sort((a, b) => b.score - a.score);
-                        io.to(roomName).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
+                        io.to(room).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
 
                         // Update players points based on the number of pairs they've matched
                         for (let i = 0; i < players.length; i++){
@@ -152,7 +158,7 @@ io.on('connection', (socket) => {
                        
                     }
                 } else {
-                    io.to(roomName).emit('message', 'Cards do not match.');
+                    io.to(room).emit('message', 'Cards do not match.');
                 }
 
                 if (games.players.length > 1)game.currentTurnIndex++;
@@ -163,11 +169,12 @@ io.on('connection', (socket) => {
                     if (game.players.length > 1) {
                         game.currentTurnIndex = (game.currentTurnIndex + 1) % game.players.length;  // Rotate turns for multiplayer
                     }
-                    io.to(roomName).emit('game_state', game); // Update clients after delay
+                    io.to(room).emit('game_state', game); // Update clients after delay
                 }, 1000);
-            } else {
-                io.to(roomName).emit('game_state', game); // Update clients when a card is flipped
-            }            
+            } 
+            // else {
+            //     io.to(room).emit('game_state', game); // Update clients when a card is flipped
+            // }            
         }        
     });
     

@@ -36,7 +36,7 @@ const Create = () => {
 
     socket.on("game_state", (game) => {
       setInitialGame(game);
-      console.log("Set game: ", game)
+      //console.log("Set game: ", game)
     })
 
     socket.on("create_room_done", (msg) => {
