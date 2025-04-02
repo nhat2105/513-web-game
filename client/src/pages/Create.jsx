@@ -48,6 +48,11 @@ const Create = () => {
   })
 
   const createMGame = () => {
+    if (!localStorage.getItem("username")){
+      navigate("/login")
+      return;
+    }
+
     if (players === ''){
       setError("Please select players.");
     } else if (cards === ""){
@@ -87,7 +92,7 @@ const Create = () => {
           <h3>Choose Number of Cards</h3>
           <Dropdown
             label={`Number of Cards: ${cards || ''}`}
-            options={['28', '30', '32']}
+            options={['26', '28', '30']}
             onSelect={handleCardsSelect}
           />
 

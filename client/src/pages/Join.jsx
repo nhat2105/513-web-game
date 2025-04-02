@@ -1,36 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { initializeSocket } from "../socket";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setGameState } from '../redux/gameSlice';
+//import { useSelector } from 'react-redux';
 
 const Join = () =>{
 
     const navigate = useNavigate()
     const socket = initializeSocket();
+    const dispatch = useDispatch();
+
     const [roomName, setRoomName] = useState("")
     const [error, setError] = useState("");
-
+    const username = localStorage.getItem("username");
+    const [nickname, setNickname] = useState("")
+    //var gameState = useSelector((state) => state.game.gameState)
 
     useEffect(() => {
         socket.on("join_room_error", (msg) => {
-            setError(msg)
+          setError(msg)
+        })
+
+        socket.on("game_state", (game) => {
+          dispatch(setGameState(game))
         })
 
         socket.on("join_room_done", (msg) => {
-            setError("");
-            navigate(`/mgame/${roomName}`) //Will need to have id of roomname in mgame
+          setError("");
+          navigate(`/mgame/${roomName}`);
+
         })
 
         return () => {
             socket.off("join_room_error");
             socket.off("join_room_done");
+            socket.off("game_state")
         };
-    }, [error, socket, navigate, roomName])
+    }, [error, socket, navigate, roomName, dispatch])
 
     function handleJoinRoom(roomName){
-       
-        var username = localStorage.getItem("username")
-        socket.emit("join_room", {username: username, roomName: roomName});
-     
+      if (username)socket.emit("join_room", {username: username, roomName: roomName});
+      else {
+        localStorage.setItem("nickname", nickname)
+        socket.emit("join_room", {username: nickname, roomName: roomName})
+      }
     }
 
     return(
@@ -51,6 +65,20 @@ const Join = () =>{
                 onChange={(e) => setRoomName(e.target.value)}
                 style={{ padding: '8px', marginBottom: '12px', borderRadius: '4px', border: '1px solid lightgray' }}
               />
+
+              { !username && (
+                <>
+                  <h3 style={{ marginBottom: '5px', width: 300 }}>Enter Nickname:</h3>
+                  <input
+                    type="text"
+                    placeholder="Nickname"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    style={{ padding: '8px', marginBottom: '12px', borderRadius: '4px', border: '1px solid lightgray' }}
+                  />
+                </>
+              )}
+
               
               <button onClick={() => handleJoinRoom(roomName)}
                 style={{

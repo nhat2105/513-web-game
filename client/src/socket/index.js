@@ -6,7 +6,6 @@ let socket = null;
 const initializeSocket = () => {
     if (!socket) {
         const token = localStorage.getItem("token");
-
         socket = io(serverEndpoint, {
             auth: {
                 token: token ? token : null,

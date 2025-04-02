@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { initializeSocket } from '../socket';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setGameState } from '../redux/gameSlice';
+import { useSelector } from 'react-redux';
 
-//TODO: disable clicking on matched cards
-const CardGame = ({intialGameState, roomName}) => {
+//TODO: handling not your turn + direct link
+const CardGame = ({roomName}) => {
+  const dispatch = useDispatch()
   const socket = initializeSocket();
+
   const [flippedCards, setFlippedCards] = useState([]); // Cards that are flipped (indexes)
   const [matchedPairs, setMatchedPairs] = useState([]); // Matched pairs (values)
-  const [gameState, setGameState] = useState(intialGameState); // Game state from backend
+  //const [gameState, setGameState] = useState(intialGameState); // Game state from backend
   const [canClick, setCanClick] = useState(false); // Whether the current player can flip cards
-  const playerName = localStorage.getItem("username") || "player"; 
+  const playerName = localStorage.getItem("username") || localStorage.getItem("nickname"); 
+
+  const gameState = useSelector((state) => state.game.gameState);
 
   useEffect(() => {
     // Connect to the socket
@@ -17,11 +23,14 @@ const CardGame = ({intialGameState, roomName}) => {
 
     // Listen for the game state from the backend
     socket.on('game_state', (game) => {
-      setGameState(game);
+      dispatch(setGameState(game));
       setFlippedCards(game.flippedCards);
       setMatchedPairs(game.matchedPairs);
+      
 
       const currentPlayer = game.players[game.currentTurnIndex];
+      console.log("Player turn ", currentPlayer);
+
       if (currentPlayer && currentPlayer.username === playerName) {
         setCanClick(true); // Allow the current player to flip cards
         
@@ -38,21 +47,25 @@ const CardGame = ({intialGameState, roomName}) => {
       // }
     });
 
-    socket.on('cards_match', (matchedPairValues) => {
-      setMatchedPairs(matchedPairValues)
+    socket.on("not_your_turn", (obj) => {
+      setCanClick(false);
     });
+
+    // socket.on('cards_match', (matchedPairValues) => {
+    //   setMatchedPairs(matchedPairValues)
+    // });
 
     return () => {
       socket.off('game_state');
       socket.off('message');
       socket.off('cards_match');
     };
-  }, [playerName, socket, canClick, matchedPairs, flippedCards]);
+  }, [playerName, socket, canClick, matchedPairs, flippedCards, dispatch]);
 
   const handleClick = (index, value) => {
     if (matchedPairs.includes(value))return; // can't click on mapped cards
    
-    if (!gameState || flippedCards.length >= 2) return;
+    if (!gameState || flippedCards.length >= 2 || !canClick) return;
     
     setFlippedCards((prev) => [...prev, index]); 
     // console.log("Flipped cards: ", index, " value ", value)
@@ -60,10 +73,9 @@ const CardGame = ({intialGameState, roomName}) => {
     //setFlippedCards([]);
   };
 
-  
-
   return (
     <div className="cardgame-display">
+      { console.log("GAME STATE ", gameState) }
       { gameState && gameState.shuffledArray.map((card, index) => {
         return (
           <div key={index}

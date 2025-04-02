@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
         // Create a new game room
         const game = games.addGame(socket.id, roomName, difficulty, count);
         games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
-                                                "♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
+            "♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
 
         // Join the room and notify everyone in the room about the creation
         socket.join(roomName);
@@ -82,6 +82,8 @@ io.on('connection', (socket) => {
         io.to(roomName).emit('message', `${username} joined room ${roomName}`);
         
         // Send updated game state to all players in the room
+        console.log("EMMITTING game: ", game);
+        console.log("ROOM: ", roomName)
         io.to(roomName).emit('game_state', game);
 
         io.to(roomName).emit("player_index", player.player_turn);    
@@ -135,7 +137,7 @@ io.on('connection', (socket) => {
                 const [firstIndex, secondIndex] = game.flippedCards;
                 if (game.shuffledArray[firstIndex] === game.shuffledArray[secondIndex]) {
                     game.matchedPairs.push(game.shuffledArray[firstIndex]); //return values matched
-                    io.to(room).emit('cards_match', game.matchedPairs);
+                    io.to(room).emit('cards_match', game.matchedPairs);0
                     const player = game.players.find(p => p.username === playerName);
                     player.score++;
                     io.to(room).emit('message', 'Points = ' + player.score);
@@ -168,6 +170,7 @@ io.on('connection', (socket) => {
                     game.flippedCards = [];
                     if (game.players.length > 1) {
                         game.currentTurnIndex = (game.currentTurnIndex + 1) % game.players.length;  // Rotate turns for multiplayer
+                        console.log("SENDING BACK CURRENT INDEX: ", game.currentTurnIndex)
                     }
                     io.to(room).emit('game_state', game); // Update clients after delay
                 }, 1000);
