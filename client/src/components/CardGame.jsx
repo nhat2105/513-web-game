@@ -64,6 +64,7 @@ const CardGame = ({roomName}) => {
 
   const handleClick = (index, value) => {
     if (matchedPairs.includes(value))return; // can't click on mapped cards
+    if (flippedCards.includes(index))return; //not clicking on the same card to cheat
    
     if (!gameState || flippedCards.length >= 2 || !canClick) return;
     
