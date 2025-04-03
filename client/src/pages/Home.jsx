@@ -1,8 +1,11 @@
+import DaRules from '../components/DaRules'
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 // import { guestLogin } from '../axios/api';
 const Home = () => {
+  const [showRules, setShowRules] = React.useState(false);
+  const toggleRules = () => setShowRules(!showRules);
   const navigate = useNavigate(); // useNavigate hook for routing
   const [isLoggedIn, setLoggedIn] = useState(false)
 
@@ -36,6 +39,7 @@ const Home = () => {
 
   return(
     <body>
+      {<DaRules showRules = {showRules} setShowRules={setShowRules}/>}
       <br/>
       {!isLoggedIn &&<div class = "home-login-button">
         <a href = "/login" id = "input-button" onClick={handleLogin}>Login</a>
@@ -49,7 +53,7 @@ const Home = () => {
         <a href = "/Sgame" id = "input-button">Single Player</a>
         {isLoggedIn && <a href = "/create" id = "input-button">Create Game</a>}
         <a href = "/join" id = "input-button">Join Game</a>
-        <a id = "rules-button">Rules</a>
+        <a id = "rules-button" onClick={toggleRules}>Rules</a>
       </div>
     
     </body>
