@@ -7,7 +7,7 @@ import { setGameState } from '../redux/gameSlice';
 
 const Create = () => {
   const navigate = useNavigate();
-  const [players, setPlayers] = useState('');
+  const [players, setPlayers] = useState(0);
   const [cards, setCards] = useState('');
   const [background, setBackground] = useState('');
   const [error, setError] = useState('');
@@ -81,7 +81,7 @@ const Create = () => {
         gameCount = 15;
       }
       var username = sessionStorage.getItem('username');
-      socket.emit('create_room', { roomName, difficulty: gameDifficulty, count: gameCount, playerName: username });
+      socket.emit('create_room', { roomName, difficulty: gameDifficulty, count: gameCount, playerName: username, max: players});
     }
   };
 
@@ -102,7 +102,7 @@ const Create = () => {
           <h3>Select Number of Players</h3>
           <Dropdown
             label={`Number of Players: ${players || ''}`}
-            options={['1', '2', '3', '4', '5']}
+            options={[2, 3, 4, 5]}
             onSelect={handlePlayersSelect}
           />
 

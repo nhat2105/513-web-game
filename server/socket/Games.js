@@ -5,7 +5,7 @@ class Games {
     }
 
     // Add a new game (room)
-    addGame(hostID, roomName, difficulty, count) {
+    addGame(hostID, roomName, difficulty, count, max) {
         let game = {
             host: hostID,
             room: roomName,
@@ -16,6 +16,7 @@ class Games {
             matchedPairs: [],
             flippedCards: [],
             currentTurnIndex: 0, // Tracks whose turn it is
+            maxPlayers: max, // Maximum number of players allowed in the game
         };
         this.games.push(game);
         return game;

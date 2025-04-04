@@ -1,0 +1,18 @@
+
+.multiplayer-wait-background {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000000;
+}
+
+.multiplayer-wait-container {
+    position: fixed;
+    background-color: rgb(93, 132, 87);
+    border-radius: 10px;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+}
