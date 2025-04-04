@@ -51,7 +51,7 @@ const Create = () => {
     var gameDifficulty = "";
     var gameCount = 0;
 
-    if (!localStorage.getItem("username")){
+    if (!sessionStorage.getItem("username")){
       navigate("/login")
       return;
     }
@@ -80,7 +80,7 @@ const Create = () => {
         gameDifficulty = "hard";
         gameCount = 15;
       }
-      var username = localStorage.getItem('username');
+      var username = sessionStorage.getItem('username');
       socket.emit('create_room', { roomName, difficulty: gameDifficulty, count: gameCount, playerName: username });
     }
   };

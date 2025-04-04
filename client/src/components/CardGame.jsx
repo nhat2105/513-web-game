@@ -14,7 +14,7 @@ const CardGame = ({roomName}) => {
   const [difficulty, setDifficulty] = useState(""); // Difficulty level for card amount
   //const [gameState, setGameState] = useState(intialGameState); // Game state from backend
   const [canClick, setCanClick] = useState(false); // Whether the current player can flip cards
-  const playerName = localStorage.getItem("username") || localStorage.getItem("nickname"); 
+  const playerName = sessionStorage.getItem("username") || sessionStorage.getItem("nickname"); 
 
   const gameState = useSelector((state) => state.game.gameState);
 

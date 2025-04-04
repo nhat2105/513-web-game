@@ -13,7 +13,7 @@ const Join = () =>{
 
     const [roomName, setRoomName] = useState("")
     const [error, setError] = useState("");
-    const username = localStorage.getItem("username");
+    const username = sessionStorage.getItem("username");
     const [nickname, setNickname] = useState("")
     //var gameState = useSelector((state) => state.game.gameState)
 
@@ -40,9 +40,11 @@ const Join = () =>{
     }, [error, socket, navigate, roomName, dispatch])
 
     function handleJoinRoom(roomName){
+      sessionStorage.getItem("NICKNAME: ", nickname)
+      sessionStorage.getItem("USERNAME: ", username)
       if (username)socket.emit("join_room", {username: username, roomName: roomName});
       else {
-        localStorage.setItem("nickname", nickname)
+        sessionStorage.setItem("nickname", nickname)
         socket.emit("join_room", {username: nickname, roomName: roomName})
       }
     }

@@ -9,8 +9,8 @@ const Home = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check localStorage when the component mounts
-    if (localStorage.getItem("loggedIn") === "true") {
+    // Check sessionStorage when the component mounts
+    if (sessionStorage.getItem("loggedIn") === "true") {
       setLoggedIn(true);
     }
   }, []);
