@@ -9,7 +9,7 @@ const Create = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState(0);
   const [cards, setCards] = useState('');
-  const [background, setBackground] = useState('');
+  const [style, setStyle] = useState('');
   const [error, setError] = useState('');
   const [roomName, setRoomName] = useState("");
   const [intialGameState, setInitialGame] = useState(null);
@@ -25,8 +25,8 @@ const Create = () => {
     setCards(option);
   };
 
-  const handleBackgroundSelect = (option) => {
-    setBackground(option);
+  const handleStyleSelect = (option) => {
+    setStyle(option);
   };
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const Create = () => {
       setError("Please select players.");
     } else if (cards === ""){
       setError("Please select number of cards.");
-    } else if (background === ""){
-      setError("Please select background colors.")
+    } else if (style === ""){
+      setError("Please select style.")
     } else if (roomName === ""){
       setError("Please enter a room name");
     }
@@ -81,7 +81,7 @@ const Create = () => {
         gameCount = 15;
       }
       var username = sessionStorage.getItem('username');
-      socket.emit('create_room', { roomName, difficulty: gameDifficulty, count: gameCount, playerName: username, max: players});
+      socket.emit('create_room', { roomName, difficulty: gameDifficulty, count: gameCount, playerName: username, max: players, gamestyle: style});
     }
   };
 
@@ -113,11 +113,11 @@ const Create = () => {
             onSelect={handleCardsSelect}
           />
 
-          <h3>Choose Background Color</h3>
+          <h3>Choose Style</h3>
           <Dropdown
-            label={`Background Color: ${background || ''}`}
-            options={['Red', 'Green', 'Blue']}
-            onSelect={handleBackgroundSelect}
+            label={`Style: ${style || ''}`}
+            options={['Red & Gold', 'Green & Red', 'Purple & Yellow']}
+            onSelect={handleStyleSelect}
           />
 
           <h3>Enter Room Name</h3>

@@ -9,6 +9,14 @@
     align-items: center;
 }
 
+#redgold .gameProfile-body {
+    background-color: rgb(151, 42, 42);
+}
+
+#purpleyellow .gameProfile-body {
+    background-color: rgb(126, 42, 151);
+}
+
 .gameProfile-userIcon {
     height: 70px;
     width: 70px;
