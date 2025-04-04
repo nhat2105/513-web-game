@@ -1,12 +1,12 @@
 import React from "react";
 
-const GameProfile = () => { 
+const GameProfile = ({playerName, points}) => { 
     return (
         <div className="gameProfile-body">
             <img src="placeholder" className="gameProfile-userIcon"></img>
             <div className="gameProfile-userInfo"> 
-                <div id = "gameProfile-words">Username</div>
-                <div>Points: 0</div>
+                <div id = "gameProfile-words">Player: {playerName}</div>
+                <div>Points: {points}</div>
             </div>
         </div>
     );

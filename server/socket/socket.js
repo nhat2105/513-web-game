@@ -152,6 +152,7 @@ io.on('connection', (socket) => {
                     const player = game.players.find(p => p.username === playerName);
                     player.score++;
                     io.to(room).emit('message', 'Points = ' + player.score);
+                    io.to(room).emit("points_updated", player);
                     game.count--;
                     io.to(room).emit('message', "Pairs left: = " + game.count) 
                                         
