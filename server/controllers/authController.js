@@ -14,6 +14,32 @@ async function registerUser(username, password){
   }
 }
 
+async function changeUserPassword(username, oldPassword, newPassword) {
+  try {
+    const user = await userModel.getUserByUsername(username);
+    //console.log("username: ", username)
+    
+    if (!user) {
+      console.log("Invalid username")
+      throw new Error('Invalid username');
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      console.log("Current password is wrong")
+      throw new Error('Current password is wrong');
+    }
+
+    console.log("PASSWORD CORRECT")
+    const data = await userModel.changePassword(username, newPassword);
+    console.log("DATA REPLIED: ", data)
+    return data;
+
+  } catch (err) {
+    throw new Error('Changed password failed: ' + err.message);
+  }
+}
+
 async function loginUser(username, password) {
   try {
     const user = await userModel.getUserByUsername(username);
@@ -57,4 +83,4 @@ async function authenticateSocket(socket, next) {
   }
 }
 
-module.exports = { loginUser, authenticateSocket, registerUser };
+module.exports = { loginUser, authenticateSocket, registerUser, changeUserPassword };

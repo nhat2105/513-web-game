@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardGame from '../components/CardGame';
 import GameProfile from '../components/GameProfile';
 import { useParams } from 'react-router-dom';
@@ -9,7 +9,6 @@ const MultiplayerGameBoard = () => {
     const roomName = useParams();
     const gamestate = useSelector((state) => state.game.gameState);
     const maxPlayers = gamestate.maxPlayers;
-
 
     return (
           <div className='gameboard-game-page'>

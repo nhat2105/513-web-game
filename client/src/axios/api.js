@@ -13,10 +13,19 @@ export const login = async (username, password) => {
   }
 };
 
+export const changePassword = async (username, password, newpassword) => {
+  try {
+    const response = await api.put('/password', { username, password, newpassword });
+    return response.data;
+  } catch (error) {
+    throw new Error('Changed password failed: ', error);
+  }
+};
+
 export const register = async (username, password) => {
   try {
     const response = await api.post('/register', { username, password});
-    console.log("CONGRATS BITCH YOU'RE IN: ", response.data);
+    //console.log("CONGRATS BITCH YOU'RE IN: ", response.data);
     return response.data;
   } catch (error) {
     throw new Error('Registration failed');

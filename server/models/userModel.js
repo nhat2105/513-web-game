@@ -1,7 +1,6 @@
 const { connectToDatabase } = require("../database/db")
 const { hashPassword } = require('../utils/hashUtils');
 
-
 async function registerNewUser(username, password){
   const client = await connectToDatabase();
   try{
@@ -21,7 +20,6 @@ async function registerNewUser(username, password){
     await client.end();
   }
 }
-
 
 // Query for user login by username
 async function getUserByUsername(username) {
@@ -54,8 +52,25 @@ async function updateUserPoints(username, additionalPoints) {
   }
 }
 
+async function changePassword(username, password){
+  const client = await connectToDatabase();
+  try{
+    const hashedPass = await hashPassword(password);
+    const result = await client.query(
+      'UPDATE users SET password = $2 WHERE username = $1 RETURNING *',
+      [username, hashedPass]);
+
+    console.log(result.rows[0]);
+    return result.rows[0];
+  } catch (err) {
+    throw new Error("Error of cannot changing password: ", err);
+  } finally {
+    await client.end();
+  }
+}
 
 module.exports = {
+  changePassword,
   getUserByUsername,
   updateUserPoints,
   registerNewUser
