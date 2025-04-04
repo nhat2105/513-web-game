@@ -6,10 +6,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import MultiplayerGameOver from './MultiplayerGameOver';
 
-//TODO: game profiles = no of players in the room 
 //TODO: nicknames = usernames 
 //TODO: password change
-
 
 const CardGame = ({roomName}) => {
   const dispatch = useDispatch()
