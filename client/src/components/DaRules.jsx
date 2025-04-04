@@ -4,7 +4,7 @@ const DaRules = ({showRules, setShowRules}) => {
     const toggleRules = () => setShowRules(!showRules);
     if (!showRules) return null;
     return (
-        <body className="rules-background">
+        <div className="rules-background">
             <div className="rules-container">
                 <button className="rules-button" onClick={toggleRules}>X</button>
                 <h1>Rules</h1>
@@ -45,7 +45,7 @@ const DaRules = ({showRules, setShowRules}) => {
                     </p>
                 </div>
             </div>
-        </body>
+        </div>
     );
 };
 
