@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import MultiplayerGameOver from './MultiplayerGameOver';
 
-//TODO: nicknames = usernames 
 //TODO: password change
 
 const CardGame = ({roomName}) => {
@@ -20,7 +19,6 @@ const CardGame = ({roomName}) => {
   const [flippedCards, setFlippedCards] = useState([]); // Cards that are flipped (indexes)
   const [matchedPairs, setMatchedPairs] = useState([]); // Matched pairs (values)
   const [difficulty, setDifficulty] = useState(""); // Difficulty level for card amount
-  //const [gameState, setGameState] = useState(intialGameState); // Game state from backend
   const [canClick, setCanClick] = useState(false); // Whether the current player can flip cards
   const playerName = sessionStorage.getItem("username") || sessionStorage.getItem("nickname"); 
 
@@ -79,7 +77,8 @@ const CardGame = ({roomName}) => {
       socket.off('game_state');
       socket.off('message');
       socket.off('cards_match');
-      socket.off("game_over")
+      socket.off("game_over");
+      socket.off("room_host");
     };
   }, [playerName, socket, canClick, matchedPairs, flippedCards, dispatch, roomHost]);
 

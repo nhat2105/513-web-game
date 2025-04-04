@@ -19,8 +19,8 @@ const MultiplayerGameBoard = () => {
             </div>
             {/* {console.log("Initial game state using dispatch: ", gamestate)} */}
             <div className='gameboard-userboard'>
-                {gamestate.players.map((_, i) => (
-                    <GameProfile key={i} />
+                {gamestate.players.map((player, i) => (
+                    <GameProfile key={i} playerName={player.username} points={player.score}/>
                 ))}
             </div>
           </div>
