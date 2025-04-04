@@ -1,7 +1,7 @@
 
 .singleplayer-gameover-background {
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100%;
     z-index: 10000000;
@@ -9,7 +9,7 @@
 
 .singleplayer-gameover-container {
     position: fixed;
-    background-color: rgb(93, 132, 87);
+    background-color: rgba(87, 200, 81, 1);
     border-radius: 10px;
     top: 25%;
     left: 25%;

@@ -16,6 +16,13 @@
     color: white;
 }
 
+#redgold .gameboard-cardgame {
+  background-color: rgb(151, 42, 42);
+}
+#purpleyellow .gameboard-cardgame {
+  background-color: rgb(126, 42, 151);
+}
+
 .gameboard-userboard {
     display: grid;
     background-color: rgb(67, 86, 68);
@@ -23,4 +30,11 @@
     height: 100vh;
     align-items: center;
     justify-content: center;
+}
+#redgold .gameboard-userboard {
+  background-color: rgb(72, 44, 44);
+}
+
+#purpleyellow .gameboard-userboard {
+  background-color: rgb(67, 44, 72);
 }

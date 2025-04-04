@@ -31,8 +31,8 @@ io.on('connection', (socket) => {
     // console.log('Authenticated user: ', socket.user.username); //
 
     // Handle room creation
-    socket.on("create_room", ({ roomName, difficulty, count, playerName, max }) => {
-        console.log('Received create_room:', roomName, difficulty, count, playerName, max);
+    socket.on("create_room", ({ roomName, difficulty, count, playerName, max, gamestyle}) => {
+        console.log('Received create_room:', roomName, difficulty, count, playerName, max, gamestyle);
 
         // Check if the room already exists
         if (!games.checkRoomName(roomName)) {
@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
         }
 
         // Create a new game room
-        const game = games.addGame(playerName, roomName, difficulty, count, max);
+        const game = games.addGame(playerName, roomName, difficulty, count, max, gamestyle);
 
         // Create amount of cards based on difficulty
         if(games.getGame(roomName).difficulty === "hard"){

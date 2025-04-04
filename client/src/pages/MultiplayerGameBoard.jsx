@@ -10,7 +10,20 @@ const MultiplayerGameBoard = () => {
     const gamestate = useSelector((state) => state.game.gameState);
     const maxPlayers = gamestate.maxPlayers;
 
+    function getGameStyle() {
+        if(gamestate.gamestyle === "Red & Gold") {
+            console.log("Red & Gold style selected")
+            return "redgold";
+        } else if (gamestate.gamestyle === "Purple & Yellow") {
+            return "purpleyellow";
+        } else {
+            return "";
+        }
+
+    }
+
     return (
+        <div id = {getGameStyle()}>
           <div className='gameboard-game-page'>
             <MultiplayerWait currentPlayers = {gamestate.players.length} totalPlayers={maxPlayers}/>
             <div className='gameboard-cardgame'>
@@ -23,6 +36,7 @@ const MultiplayerGameBoard = () => {
                 ))}
             </div>
           </div>
+        </div>
     );
 };
 

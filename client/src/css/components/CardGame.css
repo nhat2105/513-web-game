@@ -58,6 +58,14 @@
   backface-visibility: hidden;
 }
 
+#redgold .cardgame-card-back {
+  background-color: rgb(218,165,32);
+}
+
+#purpleyellow .cardgame-card-back {
+  background-color: rgb(218,165,32);
+}
+
 .cardgame-card.cardgame-flipped {
   transform: unset;
   transform-style: preserve-3d;
