@@ -48,6 +48,7 @@ const Home = () => {
       {!isLoggedIn &&<div className = "home-login-button">
         <a href = "/login" id = "input-button" /*onClick={handleLogin}*/>Login</a>
       </div> }
+      {isLoggedIn && <img className='home-user-icon' src='../default_user_icon.png'/>}
       <div className = "home-introduction">
         <h1 className = "home-title">Welcome to Card Pairs</h1>
         <p className = "home-subtitle">A game of memory</p>
