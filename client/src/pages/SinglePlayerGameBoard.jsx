@@ -19,7 +19,7 @@ const SinglePlayerGameBoard = () => {
     };
 
     return(
-        <body className='singleplayer-board'> 
+        <div className='singleplayer-board'> 
         {<SinglePlayerGameOver gamePoints = {gamePoints}/>}
             <div>
             <SinglePlayerCardGame gamePoints = {gamePoints} setGamePoints = {setGamePoints}/>
@@ -30,7 +30,7 @@ const SinglePlayerGameBoard = () => {
                     Points: {gamePoints}
                 </h2>
             </div>
-        </body>
+        </div>
     );
 }
 
