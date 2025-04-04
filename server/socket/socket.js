@@ -42,8 +42,18 @@ io.on('connection', (socket) => {
 
         // Create a new game room
         const game = games.addGame(socket.id, roomName, difficulty, count);
-        games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
-            "♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
+
+        // Create amount of cards based on difficulty
+        if(games.getGame(roomName).difficulty === "hard"){
+            games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
+                "♠", "♣", "♥", "♦", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J"]);
+        } else if (games.getGame(roomName).difficulty === "medium"){
+            games.shuffleArray(game.shuffledArray = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                "A", "2", "3", "4", "5", "6", "7", "8", "9", "10"]);
+        } else {
+            games.shuffleArray(game.shuffledArray = ["♠", "♣", "♥", "♦", "A", "J",
+                "♠", "♣", "♥", "♦", "A", "J"]);
+        }
 
         // Join the room and notify everyone in the room about the creation
         socket.join(roomName);

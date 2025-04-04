@@ -11,6 +11,7 @@ const CardGame = ({roomName}) => {
 
   const [flippedCards, setFlippedCards] = useState([]); // Cards that are flipped (indexes)
   const [matchedPairs, setMatchedPairs] = useState([]); // Matched pairs (values)
+  const [difficulty, setDifficulty] = useState(""); // Difficulty level for card amount
   //const [gameState, setGameState] = useState(intialGameState); // Game state from backend
   const [canClick, setCanClick] = useState(false); // Whether the current player can flip cards
   const playerName = localStorage.getItem("username") || localStorage.getItem("nickname"); 
@@ -27,6 +28,8 @@ const CardGame = ({roomName}) => {
       setFlippedCards(game.flippedCards);
       setMatchedPairs(game.matchedPairs);
       
+      // adjusts the card layout based on the difficulty level
+      setDifficulty(game.difficulty);
 
       const currentPlayer = game.players[game.currentTurnIndex];
       console.log("Player turn ", currentPlayer);
@@ -62,6 +65,7 @@ const CardGame = ({roomName}) => {
     };
   }, [playerName, socket, canClick, matchedPairs, flippedCards, dispatch]);
 
+  // Game clicking logic
   const handleClick = (index, value) => {
     if (matchedPairs.includes(value))return; // can't click on mapped cards
     if (flippedCards.includes(index))return; //not clicking on the same card to cheat
@@ -74,8 +78,19 @@ const CardGame = ({roomName}) => {
     //setFlippedCards([]);
   };
 
+  const handleDisplay = () => { 
+    console.log("DIFFICULTY ", difficulty)
+    if(difficulty === "easy"){  
+      return "cardgame-display-12";
+    }else if(difficulty === "medium"){ 
+      return "cardgame-display-20";
+    }else{ 
+      return "cardgame-display-30";
+    }
+  };
+
   return (
-    <div className="cardgame-display">
+    <div className={handleDisplay()}>
       { console.log("GAME STATE ", gameState) }
       { gameState && gameState.shuffledArray.map((card, index) => {
         return (

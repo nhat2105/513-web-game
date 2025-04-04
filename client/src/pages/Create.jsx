@@ -48,11 +48,15 @@ const Create = () => {
   })
 
   const createMGame = () => {
+    var gameDifficulty = "";
+    var gameCount = 0;
+
     if (!localStorage.getItem("username")){
       navigate("/login")
       return;
     }
 
+    //Error handling for empty fields
     if (players === ''){
       setError("Please select players.");
     } else if (cards === ""){
@@ -63,8 +67,21 @@ const Create = () => {
       setError("Please enter a room name");
     }
     else {
+      // Checks the number of cards selected
+      if (cards === "12"){
+        gameDifficulty = "easy";
+        gameCount = 6;
+      }
+      else if (cards === "20"){
+        gameDifficulty = "medium";
+        gameCount = 10;
+      }
+      else {
+        gameDifficulty = "hard";
+        gameCount = 15;
+      }
       var username = localStorage.getItem('username');
-      socket.emit('create_room', { roomName, difficulty: 'easy', count: 15, playerName: username });
+      socket.emit('create_room', { roomName, difficulty: gameDifficulty, count: gameCount, playerName: username });
     }
   };
 
@@ -92,7 +109,7 @@ const Create = () => {
           <h3>Choose Number of Cards</h3>
           <Dropdown
             label={`Number of Cards: ${cards || ''}`}
-            options={['26', '28', '30']}
+            options={['12', '20', '30']}
             onSelect={handleCardsSelect}
           />
 

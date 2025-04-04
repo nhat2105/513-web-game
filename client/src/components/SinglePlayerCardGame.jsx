@@ -34,7 +34,7 @@ function SinglePlayerCardGame({ gamePoints, setGamePoints }) {  // Destructure p
   };
 
   return (
-    <div className="cardgame-display">
+    <div className="cardgame-display-30">
       {deck.map((card, index) => {
         return (
           <div

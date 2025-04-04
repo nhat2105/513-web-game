@@ -45,7 +45,6 @@ const Home = () => {
   return(
     <div>
       {<DaRules showRules = {showRules} setShowRules={setShowRules}/>}
-      <br/>
       {!isLoggedIn &&<div className = "home-login-button">
         <a href = "/login" id = "input-button" /*onClick={handleLogin}*/>Login</a>
       </div> }
