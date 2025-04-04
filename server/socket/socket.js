@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
         }
 
         // Create a new game room
-        const game = games.addGame(socket.id, roomName, difficulty, count);
+        const game = games.addGame(playerName, roomName, difficulty, count);
 
         // Create amount of cards based on difficulty
         if(games.getGame(roomName).difficulty === "hard"){
@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
         let player = {
             username: playerName,
             roomName: roomName,
-            roomID: socket.id,
+            //roomID: socket.id,
             player_turn: 0,
             score: 0,
         };
@@ -86,7 +86,8 @@ io.on('connection', (socket) => {
         }
     
         // Add player to the game
-        const player = games.addPlayer(username, roomName, game.host);
+        // const player = games.addPlayer(username, roomName, game.host);
+        const player = games.addPlayer(username, roomName);
         
         socket.join(roomName);
         io.to(roomName).emit('message', `${username} joined room ${roomName}`);
@@ -157,7 +158,10 @@ io.on('connection', (socket) => {
                     if (game.count == 0){
                         const players = game.players;
                         players.sort((a, b) => b.score - a.score);
+                       
                         io.to(room).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
+                        io.to(room).emit("room_host", game.host);
+                        io.to(room).emit("game_over", players);
 
                         // Update players points based on the number of pairs they've matched
                         for (let i = 0; i < players.length; i++){

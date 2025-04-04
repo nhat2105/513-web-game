@@ -22,11 +22,12 @@ class Games {
     }
     
     // Add a player to the game
-    addPlayer(username, room, hostID) {
+    // addPlayer(username, room, hostID) {
+    addPlayer(username, room) {
         let player = {
             username: username,
             roomName: room,
-            roomID: hostID,
+            // roomID: hostID,
             player_turn: 0,
             score: 0,
         };

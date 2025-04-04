@@ -30,6 +30,11 @@ const Create = () => {
   };
 
   useEffect(() => {
+    if (!sessionStorage.getItem("username")){
+      navigate("/login")
+      return;
+    }
+
     socket.on("create_room_error", (msg) => {
       setError(msg);
     })
@@ -50,11 +55,6 @@ const Create = () => {
   const createMGame = () => {
     var gameDifficulty = "";
     var gameCount = 0;
-
-    if (!sessionStorage.getItem("username")){
-      navigate("/login")
-      return;
-    }
 
     //Error handling for empty fields
     if (players === ''){

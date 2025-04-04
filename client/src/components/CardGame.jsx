@@ -4,13 +4,21 @@ import { useDispatch } from 'react-redux';
 import { setGameState } from '../redux/gameSlice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import MultiplayerGameOver from './MultiplayerGameOver';
 
-//TODO: handling not your turn + direct link
+//TODO: game profiles = no of players in the room 
+//TODO: nicknames = usernames 
+//TODO: password change
+
+
 const CardGame = ({roomName}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const socket = initializeSocket();
 
+  const [gameover, setGameOver] = useState(false);
+  const [players, setPlayers] = useState([]);
+  const [roomHost, setRoomHost] = useState("");
   const [flippedCards, setFlippedCards] = useState([]); // Cards that are flipped (indexes)
   const [matchedPairs, setMatchedPairs] = useState([]); // Matched pairs (values)
   const [difficulty, setDifficulty] = useState(""); // Difficulty level for card amount
@@ -20,7 +28,7 @@ const CardGame = ({roomName}) => {
 
   const gameState = useSelector((state) => state.game.gameState);
 
-  if (!gameState){
+  if (!gameState || !playerName){
     navigate("/join")
   }
 
@@ -56,9 +64,14 @@ const CardGame = ({roomName}) => {
       // }
     });
 
-    socket.on("not_your_turn", (obj) => {
-      setCanClick(false);
+    socket.on("game_over", (playersList) => {
+      setGameOver(true);
+      setPlayers(playersList);
     });
+
+    socket.on("room_host", (roomHost) => {
+      setRoomHost(roomHost);
+    })
 
     // socket.on('cards_match', (matchedPairValues) => {
     //   setMatchedPairs(matchedPairValues)
@@ -68,8 +81,9 @@ const CardGame = ({roomName}) => {
       socket.off('game_state');
       socket.off('message');
       socket.off('cards_match');
+      socket.off("game_over")
     };
-  }, [playerName, socket, canClick, matchedPairs, flippedCards, dispatch]);
+  }, [playerName, socket, canClick, matchedPairs, flippedCards, dispatch, roomHost]);
 
   // Game clicking logic
   const handleClick = (index, value) => {
@@ -98,7 +112,7 @@ const CardGame = ({roomName}) => {
   return (
     <div className={handleDisplay()}>
       { console.log("GAME STATE ", gameState) }
-      { gameState && gameState.shuffledArray.map((card, index) => {
+      { gameState && !gameover && gameState.shuffledArray.map((card, index) => {
         return (
           <div key={index}
             onClick={() => handleClick(index, card)}
@@ -109,6 +123,7 @@ const CardGame = ({roomName}) => {
           </div>
         )
     })}
+    { gameover && <MultiplayerGameOver players={players} roomHost={roomHost} playerName={playerName} /> }
     </div>
   );
 }
