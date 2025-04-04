@@ -3,10 +3,12 @@ import { initializeSocket } from '../socket';
 import { useDispatch } from 'react-redux';
 import { setGameState } from '../redux/gameSlice';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 //TODO: handling not your turn + direct link
 const CardGame = ({roomName}) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   const socket = initializeSocket();
 
   const [flippedCards, setFlippedCards] = useState([]); // Cards that are flipped (indexes)
@@ -17,6 +19,10 @@ const CardGame = ({roomName}) => {
   const playerName = sessionStorage.getItem("username") || sessionStorage.getItem("nickname"); 
 
   const gameState = useSelector((state) => state.game.gameState);
+
+  if (!gameState){
+    navigate("/join")
+  }
 
   useEffect(() => {
     // Connect to the socket
