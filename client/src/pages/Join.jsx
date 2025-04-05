@@ -40,8 +40,8 @@ const Join = () =>{
     }, [error, socket, navigate, roomName, dispatch])
 
     function handleJoinRoom(roomName){
-      sessionStorage.getItem("NICKNAME: ", nickname)
-      sessionStorage.getItem("USERNAME: ", username)
+      //sessionStorage.getItem("NICKNAME: ", nickname)
+      //sessionStorage.getItem("USERNAME: ", username)
       if (username)socket.emit("join_room", {username: username, roomName: roomName});
       else {
         sessionStorage.setItem("nickname", nickname)

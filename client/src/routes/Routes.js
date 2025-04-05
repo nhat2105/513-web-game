@@ -9,6 +9,7 @@ import Register from "../pages/Register";
 import MultiplayerGameBoard from "../pages/MultiplayerGameBoard";
 import SinglePlayerGameBoard from "../pages/SinglePlayerGameBoard";
 import ChangePassword from "../pages/ChangePassword";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const Routes = () => {
     return(
@@ -21,6 +22,8 @@ const Routes = () => {
             <Route path='/Mgame/:roomName' element={<MultiplayerGameBoard />} />
             <Route path='/Sgame' element={<SinglePlayerGameBoard />} />
             <Route path="/password"  element={<ChangePassword />} />
+
+            <Route path="*" element={<NotFoundPage />} />
         </RoutesWrapper>
     )
 }
