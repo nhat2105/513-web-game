@@ -1,9 +1,18 @@
 import React from 'react';
 
 const UserMenu = ({isLoggedIn, setLoggedIn, setIsUserIconClicked}) => {
-  const handleLogout = () => { 
+//   const [error, setError] = useState('');
+
+  const handleLogout = async(e) => { 
     setLoggedIn(false);
     setIsUserIconClicked(false);
+    e.preventDefault();
+    try {
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('loggedIn');
+    } catch (err) {
+    //   error('Logout failed');
+    }
   }
 
   return (

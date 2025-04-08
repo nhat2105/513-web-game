@@ -13,6 +13,9 @@ const Home = () => {
     if (sessionStorage.getItem("loggedIn") === "true") {
       setLoggedIn(true);
     }
+    else {
+      setLoggedIn(false);
+    }
   }, []);
 
   const toggleRules = () => {
