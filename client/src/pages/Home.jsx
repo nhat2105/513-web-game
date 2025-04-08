@@ -1,12 +1,12 @@
 import DaRules from '../components/DaRules'
+import UserMenu from '../components/UserMenu';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
 
 // import { guestLogin } from '../axios/api';
 const Home = () => {
   const [showRules, setShowRules] = useState(false);
-  const navigate = useNavigate(); // useNavigate hook for routing
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isUserIconClicked, setIsUserIconClicked] = useState(false);
 
   useEffect(() => {
     // Check sessionStorage when the component mounts
@@ -20,35 +20,27 @@ const Home = () => {
     console.log("Rules button clicked");
   };
 
-  // // Function to handle guest login
-  // const handleGuest = async () => {
+  const toggleUserIcon = () => {
+    setIsUserIconClicked(!isUserIconClicked);
+    console.log("User icon clicked");
+  };
 
-  //   try {
-  //     // const response = await guestLogin(); // Call the backend for guest token
-  //     // const { token, role } = response.data;
-
-  //     // localStorage.setItem('token', token);
-  //     // localStorage.setItem('role', role); // Store the guest role
-
-  //     navigate('/'); // Redirect to the game page after login
-  //   } catch (error) {
-  //     console.error('Error logging in as guest', error);
-  //   }
-  // };
-
-  // Redirect to the login page for regular users
-  const handleLogin = () => {
-    navigate('/login'); 
-    console.log("Login button clicked");
+  const iconApperance = () => {
+    if (isUserIconClicked) {
+      return "home-user-icon-pressed";
+    } else {
+      return "home-user-icon";
+    }
   };
 
   return(
     <div>
       {<DaRules showRules = {showRules} setShowRules={setShowRules}/>}
       {!isLoggedIn &&<div className = "home-login-button">
-        <a href = "/login" id = "input-button" /*onClick={handleLogin}*/>Login</a>
+        <a href = "/login" id = "input-button">Login</a>
       </div> }
-      {isLoggedIn && <img className='home-user-icon' src='../default_user_icon.png'/>}
+      {isLoggedIn && <img className={iconApperance()} src='../default_user_icon.png' onClick={toggleUserIcon}/>}
+      {isUserIconClicked && <UserMenu isLoggedIn = {isLoggedIn} setLoggedIn = {setLoggedIn} setIsUserIconClicked = {setIsUserIconClicked}/>}
       <div className = "home-introduction">
         <h1 className = "home-title">Welcome to Card Pairs</h1>
         <p className = "home-subtitle">A game of memory</p>

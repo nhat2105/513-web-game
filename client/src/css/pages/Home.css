@@ -52,3 +52,15 @@
     transition: 0.1s;
     cursor: pointer;
 }
+
+.home-user-icon-pressed {
+    background-color: grey;
+    max-width: 6%;
+    max-height: 6%;
+    /* background-color: aqua; */
+    padding: 2px;
+    border-radius: 10px;
+    position: fixed;
+    right: 1.5%;
+    top: 1.5%;
+}

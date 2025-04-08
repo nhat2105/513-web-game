@@ -1,0 +1,14 @@
+.usermenu-container {
+    position: fixed;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    /* background-color: blue; */
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    top: 8.5%;
+    right: 1.3%;
+    width: 125px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

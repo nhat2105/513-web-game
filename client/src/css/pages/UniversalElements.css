@@ -15,6 +15,7 @@
     color: rgba(87, 200, 81, 1);
     background-color: white;
     transition: 0.1s;
+    cursor: pointer;
 }
 
 #rules-button {
