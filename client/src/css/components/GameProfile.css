@@ -9,6 +9,18 @@
     align-items: center;
 }
 
+.gameProfile-body-currentturn {
+    display: flex;
+    height: 15vh;
+    width: 27vw;
+    background-color: rgb(75, 163, 75);
+    color: white;
+    border-radius: 20px;
+    font-family: sans-serif;
+    align-items: center;
+    border: 5px solid white;
+}
+
 #redgold .gameProfile-body {
     background-color: rgb(151, 42, 42);
 }

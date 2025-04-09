@@ -9,6 +9,7 @@ const MultiplayerGameBoard = () => {
     const roomName = useParams();
     const gamestate = useSelector((state) => state.game.gameState);
     const maxPlayers = gamestate.maxPlayers;
+    const currentPlayerTurn = gamestate.players[gamestate.currentTurnIndex].username;
 
     function getGameStyle() {
         if(gamestate.gamestyle === "Red & Gold") {
@@ -32,7 +33,7 @@ const MultiplayerGameBoard = () => {
             {/* {console.log("Initial game state using dispatch: ", gamestate)} */}
             <div className='gameboard-userboard'>
                 {gamestate.players.map((player, i) => (
-                    <GameProfile key={i} playerName={player.username} points={player.score}/>
+                    <GameProfile key={i} playerName={player.username} points={player.score} currentPlayerTurn = {currentPlayerTurn}/>
                 ))}
             </div>
           </div>
