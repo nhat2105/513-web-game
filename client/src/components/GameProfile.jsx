@@ -18,7 +18,7 @@ const GameProfile = ({ playerName, points, currentPlayerTurn }) => {
     return (
         <div className = {currentTurn()}>
             {/* {randomInt === 1 && <img src={pfp_1} className="gameProfile-userIcon" alt="User Icon 1" />} */}
-            {/*randomInt === 2 && */<img src="placeholder" className="gameProfile-userIcon" alt="User Icon 2" />}
+            {/*randomInt === 2 && */<img src="../default_user_icon.png" className="gameProfile-userIcon" alt="User Icon 2" />}
             
             <div className="gameProfile-userInfo"> 
                 <div id="gameProfile-words">Player: {playerName}</div>
