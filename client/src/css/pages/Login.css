@@ -1,5 +1,13 @@
+/* Highlight link style */
 .highlight-link {
   color: rgba(87, 200, 81, 1);
   cursor: pointer;
   text-decoration: underline;
+}
+
+/* Responsive adjustment for highlight link on mobile */
+@media screen and (max-width: 767px) {
+  .highlight-link {
+    font-size: 1.2em;
+  }
 }

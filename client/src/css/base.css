@@ -1,0 +1,29 @@
+/* Global mobile-first styles */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+button, 
+input[type="button"],
+input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 16px;
+    touch-action: manipulation;
+}
+
+/* Adjust font sizes for mobile */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}

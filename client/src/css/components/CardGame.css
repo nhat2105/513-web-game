@@ -1,76 +1,149 @@
-.cardgame-display-30 {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    justify-content: center;
-    gap: 10px;
-    margin: 1em 0;
-    font-family: "ubuntu mono";
-    font-size: xx-large;
-  }
-
-.cardgame-display-20 {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-content: center;
-  gap: 10px;
-  margin: 1em 0;
-  font-family: "ubuntu mono";
-  font-size: xx-large;
+/* Global variables for consistent styling */
+:root {
+  --card-gap: 8px;
+  --card-padding: 10px;
+  --card-border: 4px solid rgb(236, 236, 236);
+  --card-bg-color: rgb(255, 255, 255);
+  --card-border-radius: 10px;
+  --transition-duration: 0.3s;
+  --desktop-card-width: 75px;
+  --desktop-card-height: 100px;
+  --desktop-font-size: xx-large;
+  --mobile-font-size: large;
+  --card-back-color: rgb(201, 64, 64);
+  --special-back-color: rgb(218, 165, 32);
+  --font-family: "Ubuntu Mono", monospace;
 }
 
+/* Common grid styles for card layouts */
+.cardgame-display-30,
+.cardgame-display-20,
 .cardgame-display-12 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
-  gap: 10px;
-  margin: 1em 0;
-  font-family: "ubuntu mono";
-  font-size: xx-large;
+  gap: var(--card-gap);
+  padding: var(--card-padding);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-family);
 }
-  
+
+/* Default flexible grid layout using auto-fit and minmax */
+.cardgame-display-30 {
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+}
+.cardgame-display-20 {
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+}
+.cardgame-display-12 {
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+}
+
+/* Desktop layout (screens 768px and above) with fixed columns */
+@media screen and (min-width: 768px) {
+  .cardgame-display-30 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .cardgame-display-20 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .cardgame-display-12 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cardgame-card {
+    width: var(--desktop-card-width);
+    height: var(--desktop-card-height);
+    font-size: var(--desktop-font-size);
+  }
+}
+
+/* Mobile layout (screens below 768px) */
+@media screen and (max-width: 767px) {
+  .cardgame-display-30 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .cardgame-display-20 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cardgame-display-12 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cardgame-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    font-size: var(--mobile-font-size);
+  }
+}
+
+/* Small screen layout (screens 375px and below) */
+@media screen and (max-width: 375px) {
+  .cardgame-display-30 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cardgame-display-20,
+  .cardgame-display-12 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card styling */
 .cardgame-card {
-  background-color: rgb(255, 255, 255);
-  border: 4px solid rgb(236, 236, 236);
+  background-color: var(--card-bg-color);
+  border: var(--card-border);
   box-sizing: border-box;
-  width: 75px;
-  height: 100px;
-  display: grid;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  transition: all linear 0.3s;
-  transform: rotate3d(0, 1, 0, 180deg);
+  border-radius: var(--card-border-radius);
+  transition: transform var(--transition-duration) linear;
+  transform-style: preserve-3d;
   position: relative;
   overflow: hidden;
   color: black;
+  /* Mobile touch optimizations */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* Disable transitions for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cardgame-card,
+  .cardgame-card:hover {
+    transition: none;
+  }
+}
+
+/* Hover effect: rotate the card with a slight offset */
 .cardgame-card:hover {
   cursor: pointer;
-  transform: rotate3d(0, 1, 0, 180deg) translate(-2px,-2px);
+  transform: rotate3d(0, 1, 0, 180deg) translate(-2px, -2px);
 }
 
+/* Styling for the card back */
 .cardgame-card-back {
-  background-color: rgb(201, 64, 64);
+  background-color: var(--card-back-color);
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  transform: rotate3d(0, 0, 0, 0); /* Ensure the initial state displays correctly */
 }
 
-#redgold .cardgame-card-back {
-  background-color: rgb(218,165,32);
-}
-
+/* Special themes for specific IDs (e.g., redgold and purpleyellow) */
+#redgold .cardgame-card-back,
 #purpleyellow .cardgame-card-back {
-  background-color: rgb(218,165,32);
+  background-color: var(--special-back-color);
 }
 
+/* When the card is flipped, reset the transform */
 .cardgame-card.cardgame-flipped {
   transform: unset;
   transform-style: preserve-3d;
 }
 
+/* Transformation for the flipped state of the card back */
 .cardgame-flipped .cardgame-card-back {
   transform: rotate3d(0, 1, 0, 180deg);
 }

@@ -1,16 +1,17 @@
+/* Input button style */
 #input-button {
     background-color: rgba(87, 200, 81, 1);
     text-decoration: none;
     color: white;
     font-family: sans-serif;
-    padding: 6px 18px 6px 18px;
+    padding: 6px 18px;
     border-radius: 10px;
-    border: 2.5px rgba(87, 200, 81, 1);
-    border-style: solid;
+    border: 2.5px solid rgba(87, 200, 81, 1);
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
+/* Input button hover style */
 #input-button:hover {
     color: rgba(87, 200, 81, 1);
     background-color: white;
@@ -18,15 +19,17 @@
     cursor: pointer;
 }
 
+/* Rules button style */
 #rules-button {
     background-color: #C6C6C6;
     text-decoration: none;
     color: black;
     font-family: 'Calibri', sans-serif;
-    padding: 3px 12px 3px 12px;
+    padding: 3px 12px;
     border-radius: 10px;
 }
 
+/* Rules button hover style */
 #rules-button:hover {
     background-color: #929292;
     text-decoration: none;
@@ -37,19 +40,42 @@
     transition: 0.1s;
     cursor: pointer;
 }
+
+/* Gameover button style */
 #gameover-button {
     background-color: rgb(93, 132, 87);
     text-decoration: none;
     color: white;
     font-family: 'Calibri', sans-serif;
-    padding: 6px 18px 6px 18px;
+    padding: 6px 18px;
     border-radius: 10px;
-    border: 2.5px rgb(255, 255, 255);
-    border-style: solid;    
+    border: 2.5px solid rgb(255, 255, 255);
 }
 
+/* Gameover button hover style */
 #gameover-button:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(93, 132, 87);
     transition: 0.1s;
+}
+
+/* Responsive adjustments for mobile devices */
+@media screen and (max-width: 767px) {
+    /* Adjust input button for mobile */
+    #input-button {
+        padding: 6px 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+    /* Adjust rules button for mobile */
+    #rules-button {
+        padding: 3px 8px;
+        font-size: 14px;
+    }
+    /* Adjust gameover button for mobile */
+    #gameover-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 }
