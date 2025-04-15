@@ -17,5 +17,5 @@
 `npm start`
 
 # Docker build
-`docker-compose build`
-`docker-compose up`
+`docker compose build`
+`docker compose up`
