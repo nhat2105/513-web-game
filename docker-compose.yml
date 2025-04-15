@@ -3,11 +3,9 @@ version: "3.8"
 services:
   db:
     image: postgres:13
-    container_name: postgres
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}  # card_pairs_game
+    container_name: db
+    env_file:
+      - server/.env
     ports:
       - "5432:5432"  # Expose DB port
     networks:
@@ -15,14 +13,9 @@ services:
 
   backend:
     build: ./server
-    dockerfile: Dockerfile
     container_name: backend
-    environment:
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      DB_PORT: ${DB_PORT}
-      PORT: ${PORT}
+    env_file:
+      - server/.env
     ports:
       - "5000:5000" 
     depends_on:
@@ -32,10 +25,9 @@ services:
 
   frontend:
     build: ./client
-    dockerfile: Dockerfile
     container_name: frontend
     ports:
-      - "80:80" 
+      - "80:3000" 
     networks:
       - my-network
 
