@@ -31,26 +31,27 @@ const Create = () => {
 
   useEffect(() => {
     if (!sessionStorage.getItem("username")){
-      navigate("/login")
+      navigate("/login");
       return;
-    }
+    };
 
     socket.on("create_room_error", (msg) => {
       setError(msg);
-    })
+    });
 
     socket.on("game_state", (game) => {
-      setInitialGame(game);
+      // setInitialGame(game);
       //console.log("Set game: ", game)
-    })
+      dispatch(setGameState(game));
+    });
 
     socket.on("create_room_done", (msg) => {
       setError("");
       //console.log("inital game state before routing: ", intialGameState)
-      dispatch(setGameState(intialGameState));
+      //dispatch(setGameState(intialGameState));
       navigate(`/mgame/${roomName}`);
-    }) 
-  })
+    }) ;
+  });
 
   const createMGame = () => {
     var gameDifficulty = "";

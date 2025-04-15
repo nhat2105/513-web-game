@@ -71,6 +71,7 @@ io.on('connection', (socket) => {
         game.players.push(player);
 
         console.log("JUST PUSHED PLAYER INDEX: ", player.player_turn);
+        console.log(' LOOK HERE game_state',game);
         io.to(roomName).emit('game_state', game); // Send the initial game state to the room 
         socket.emit("create_room_done", `Create room ${roomName} successfully`)
     });
@@ -163,7 +164,6 @@ io.on('connection', (socket) => {
                         io.to(room).emit('message', `Game Over! Winner: ${players[0].username} with ${players[0].score} points!`);
                         io.to(room).emit("room_host", game.host);
                         io.to(room).emit("game_over", players);
-
                         // Update players points based on the number of pairs they've matched
                         for (let i = 0; i < players.length; i++){
                             var username = players[i].username;
@@ -172,19 +172,22 @@ io.on('connection', (socket) => {
                                 updateUserPoints(username, players[i].score);
                             }
                         }
+                        games.destroyGame(room); // Destroy the game after it's over
+                        console.log("DESTROYING GAME: ", room)
                        
                     }
                 } else {
                     io.to(room).emit('message', 'Cards do not match.');
                 }
 
-                if (games.players.length > 1)game.currentTurnIndex++;
+                //if (games.players.length > 1){game.currentTurnIndex++};
             
                 // Wait 1 second before resetting flipped cards and switching turn
                 setTimeout(() => {
                     game.flippedCards = [];
                     if (game.players.length > 1) {
-                        game.currentTurnIndex = (game.currentTurnIndex + 1) % game.players.length;  // Rotate turns for multiplayer
+                        console.log("This is the room we are in right now",room);
+                        game.currentTurnIndex = (game.currentTurnIndex + game.players.length-1) % game.players.length;  // Rotate turns for multiplayer
                         console.log("SENDING BACK CURRENT INDEX: ", game.currentTurnIndex)
                     }
                     io.to(room).emit('game_state', game); // Update clients after delay

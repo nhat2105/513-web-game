@@ -84,6 +84,18 @@ class Games {
     checkRoomName(roomName) {
         return !this.games.some((game) => game.room === roomName);
     }
+
+    // Destroy Game
+    destroyGame(roomName) { {
+        let gameIndex = this.games.findIndex((game) => game.room === roomName);
+        if (gameIndex !== -1) {
+            this.games.splice(gameIndex, 1); // Remove the game from the list
+        }
+        let playerIndex = this.players.findIndex((player) => player.roomName === roomName);
+        if (playerIndex !== -1) {
+            this.players.splice(playerIndex, 1); // Remove the player from the list
+        }
+    } }
 }
 
 module.exports = { Games };
