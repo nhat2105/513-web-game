@@ -32,53 +32,44 @@
 	outline: inherit;
     font-size: xx-large;
     font-weight: bold;
-}.gameProfile-body {
-    display: flex;
-    height: 15vh;
-    width: 27vw;
-    background-color: rgb(75, 163, 75);
-    color: white;
-    border-radius: 20px;
-    font-family: sans-serif;
-    align-items: center;
 }
 
-.gameProfile-body-currentturn {
-    display: flex;
-    height: 15vh;
-    width: 27vw;
-    background-color: rgb(75, 163, 75);
-    color: white;
-    border-radius: 20px;
-    font-family: sans-serif;
-    align-items: center;
-    border: 5px solid white;
-}
-
-#redgold .gameProfile-body {
-    background-color: rgb(151, 42, 42);
-}
-
-#purpleyellow .gameProfile-body {
-    background-color: rgb(126, 42, 151);
-}
-
-.gameProfile-userIcon {
-    height: 70px;
-    width: 70px;
-    background-color: rgb(255, 255, 255, 0);
-    margin: 10px;
-    border-radius: 25%;
-}
-
-.gameProfile-userInfo {
-    height: 70px;
-    width: 74%;
-    /* background-color: rgb(123, 39, 39); */
-    align-items: center;
-}
-
-#gameProfile-words {
-    margin-top: 5px;
-    margin-bottom: 5px;
+@media (max-width: 800px) {
+    .rules-background {
+        background-color: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        height: 97vh;
+        width: 98vw;
+    }
+    
+    .rules-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50vw;
+        height: 90vh;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        border: 4px solid rgb(0, 0, 0);
+        padding: 20px;
+        font-family: 'Calibri', sans-serif;
+        overflow: auto;
+    }
+    
+    .rules-button {
+        position: fixed;
+        top: 0vh;
+        left: 51vw;
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        font-size: xx-large;
+        font-weight: bold;
+    }
+    
 }
