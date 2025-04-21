@@ -25,7 +25,15 @@
     background-color: rgb(151, 42, 42);
 }
 
+#redgold .gameProfile-body-currentturn {
+    background-color: rgb(151, 42, 42);
+}
+
 #purpleyellow .gameProfile-body {
+    background-color: rgb(126, 42, 151);
+}
+
+#purpleyellow .gameProfile-body-currentturn {
     background-color: rgb(126, 42, 151);
 }
 
