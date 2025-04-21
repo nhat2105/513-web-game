@@ -45,8 +45,8 @@ const Home = () => {
       {isLoggedIn && <img className={iconApperance()} src='../default_user_icon.png' onClick={toggleUserIcon}/>}
       {isUserIconClicked && <UserMenu isLoggedIn = {isLoggedIn} setLoggedIn = {setLoggedIn} setIsUserIconClicked = {setIsUserIconClicked}/>}
       <div className = "home-introduction">
-        <h1 className = "home-title">Welcome to Card Pairs</h1>
-        <p className = "home-subtitle">A game of memory</p>
+        <h1 className = "home-title">Card Pairs</h1>
+        <p className = "home-subtitle">A game of Memory</p>
         <img className = "home-logo" src='../513-cardlogo.png' alt='card_pair_logo'/>
       </div>
       <div className = "home-buttons-list">

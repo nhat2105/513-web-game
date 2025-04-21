@@ -1,11 +1,20 @@
 .home-title {
     font-family: 'Calibri', sans-serif;
     font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .home-subtitle {
     font-family: 'Calibri', sans-serif;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 15px;
 }
 
 .home-buttons-list {
@@ -63,4 +72,36 @@
     position: fixed;
     right: 1.5%;
     top: 1.5%;
+}
+
+@media (max-width: 800px) {
+    .home-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 40%;
+        max-height: 40%;
+        padding: 15px;
+    }
+    .home-user-icon {
+        max-width: 12%;
+        max-height: 12%;
+        /* background-color: aqua; */
+        padding: 2px;
+        border-radius: 10px;
+        position: fixed;
+        right: 1.5%;
+        top: 1.5%;
+    }
+    .home-user-icon-pressed {
+        background-color: grey;
+        max-width: 12%;
+        max-height: 12%;
+        /* background-color: aqua; */
+        padding: 2px;
+        border-radius: 10px;
+        position: fixed;
+        right: 1.5%;
+        top: 1.5%;
+    }
 }
