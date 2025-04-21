@@ -1,47 +1,28 @@
-/* Background overlay for the multiplayer waiting modal */
+
 .multiplayer-wait-background {
-    position: fixed;                        /* Fixed to always cover the screen */
-    background-color: rgba(0, 0, 0, 0.7);     /* Semi-transparent dark overlay */
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0;
-    width: 100vw;                           /* Full viewport width */
-    height: 100vh;                          /* Full viewport height */
-    z-index: 10000000;                      /* High z-index to appear above other elements */
+    width: 100%;
+    height: 100%;
+    z-index: 10000000;
 }
 
-/* Container for the waiting modal on desktop */
 .multiplayer-wait-container {
-    position: fixed;                        /* Fixed positioning for centered modal */
-    background-color: rgb(93, 132, 87);       /* Default background color */
-    border-radius: 10px;                      /* Rounded corners */
-    top: 50%;                               /* Center vertically */
-    left: 50%;                              /* Center horizontally */
-    transform: translate(-50%, -50%);        /* Offset to truly center the container */
-    width: 50%;                             /* 50% of the viewport width */
-    height: 50%;                            /* 50% of the viewport height */
-    box-sizing: border-box;                 /* Include padding and border in total size */
-    padding: 20px;                          /* Optional padding for content */
+    position: fixed;
+    background-color: rgb(93, 132, 87);
+    border-radius: 10px;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
 }
 
-/* Theme override for 'redgold' */
 #redgold .multiplayer-wait-container {
     background-color: rgb(132, 87, 87);
 }
 
-/* Theme override for 'purpleyellow' */
 #purpleyellow .multiplayer-wait-container {
     background-color: rgb(132, 87, 132);
-}
-
-/* Responsive adjustments for mobile devices */
-@media screen and (max-width: 767px) {
-    .multiplayer-wait-container {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;           /* Use more of the available width on smaller screens */
-        height: auto;         /* Height adjusts based on content */
-        max-height: 80vh;     /* Limit height to 80% of the viewport to prevent overflow */
-        padding: 15px;        /* Adjust padding for smaller screens */
-    }
 }

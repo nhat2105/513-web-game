@@ -1,9 +1,8 @@
-/* Singleplayer board filling the screen */
-.singleplayer-board {
+.singleplayer-board{
     display: flex;
     background-color: rgb(98, 175, 94);
-    width: 100vw; /* Changed to full viewport width */
-    height: 100vh; /* Changed to full viewport height */
+    width: 99vw;
+    height: 97vh;
     margin: 0;
     align-items: center;
     justify-content: center;
@@ -11,47 +10,27 @@
     font-family: 'Calibri', sans-serif;
 }
 
-/* Points label pinned to bottom-left */
-.singleplayer-points {
+.singleplayer-points{
     position: absolute;
-    bottom: 2%;    /* Pinned from the bottom instead of top */
     left: 1.5%;
-    font-size: 18px; /* Adjust as needed for readability */
+    top: 89%;    
 }
 
-/* Quit button pinned to bottom-right */
 .singleplayer-quit-button { 
     position: absolute;
-    bottom: 2%;     /* Pinned from the bottom instead of top */
-    right: 1.5%;
+    left: 86%;
+    top: 89%;
     background-color: rgb(98, 175, 94);
     text-decoration: none;
-    color: #fff;
-    padding: 9px 36px;
+    color: rgb(255, 255, 255);
+    padding: 9px 36px 9px 36px;
     border: 2.5px solid white;
     border-radius: 5px;
     font-size: 18px;
-    cursor: pointer;
 }
 
-/* Quit button hover state */
 .singleplayer-quit-button:hover { 
     color: rgb(98, 175, 94);
-    background-color: #fff;
+    background-color: white;
     transition: 0.1s;
-}
-
-/* Responsive adjustments for smaller screens */
-@media screen and (max-width: 767px) {
-    .singleplayer-points {
-        font-size: 16px;   /* Slightly smaller text for mobile */
-        bottom: 3%;
-        left: 3%;
-    }
-    .singleplayer-quit-button {
-        font-size: 16px;   /* Slightly smaller button for mobile */
-        bottom: 3%;
-        right: 3%;
-        padding: 8px 24px;
-    }
-}
+};

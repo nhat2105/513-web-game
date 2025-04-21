@@ -1,26 +1,13 @@
-/* Home title style with responsive font size */
 .home-title {
     font-family: 'Calibri', sans-serif;
     font-size: 50px;
 }
-@media screen and (max-width: 767px) {
-    .home-title {
-        font-size: 36px;
-    }
-}
 
-/* Home subtitle style with responsive font size */
 .home-subtitle {
     font-family: 'Calibri', sans-serif;
     font-size: 20px;
 }
-@media screen and (max-width: 767px) {
-    .home-subtitle {
-        font-size: 16px;
-    }
-}
 
-/* Home buttons list styled as a vertical flex container with mobile padding adjustment */
 .home-buttons-list {
     display: flex;
     flex-direction: column;
@@ -28,26 +15,18 @@
     /* background-color: yellow; */
     padding: 10px;
 }
-@media screen and (max-width: 767px) {
-    .home-buttons-list {
-        padding: 8px;
-    }
-}
 
-/* Home introduction styled as a vertical flex container */
 .home-introduction {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Home login button container aligned to the right */
 .home-login-button {
     display: flex;
-    justify-content: flex-end;
+    justify-content: right;
 }
 
-/* Home logo centered with size restrictions and responsive adjustments */
 .home-logo {
     display: flex;
     justify-content: center;
@@ -56,15 +35,8 @@
     max-height: 10%;
     padding: 15px;
 }
-@media screen and (max-width: 767px) {
-    .home-logo {
-        max-width: 20%;
-        max-height: 20%;
-        padding: 10px;
-    }
-}
 
-/* Home user icon with fixed positioning, rounded corners, and responsive size */
+
 .home-user-icon {
     max-width: 6%;
     max-height: 6%;
@@ -75,23 +47,12 @@
     right: 1.5%;
     top: 1.5%;
 }
-@media screen and (max-width: 767px) {
-    .home-user-icon {
-        max-width: 10%;
-        max-height: 10%;
-        right: 1%;
-        top: 1%;
-    }
-}
-
-/* Home user icon hover effect */
 .home-user-icon:hover {
     background-color: grey;
     transition: 0.1s;
     cursor: pointer;
 }
 
-/* Home user icon pressed state with responsive adjustments */
 .home-user-icon-pressed {
     background-color: grey;
     max-width: 6%;
@@ -102,12 +63,4 @@
     position: fixed;
     right: 1.5%;
     top: 1.5%;
-}
-@media screen and (max-width: 767px) {
-    .home-user-icon-pressed {
-        max-width: 10%;
-        max-height: 10%;
-        right: 1%;
-        top: 1%;
-    }
 }

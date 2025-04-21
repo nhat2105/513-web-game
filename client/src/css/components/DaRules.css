@@ -1,67 +1,84 @@
-/* Modal background overlay */
-/* Use fixed positioning to ensure the overlay covers the entire viewport */
 .rules-background {
     background-color: rgba(255, 255, 255, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    height: 97vh;
+    width: 98vw;
 }
 
-/* Modal container for displaying rules */
-/* Using fixed positioning and transform to center the modal in the viewport */
 .rules-container {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* For desktop: 50% viewport width with a maximum width for large screens */
     width: 50vw;
-    max-width: 500px;
-    /* For desktop: 90% viewport height with a maximum height value */
     height: 90vh;
-    max-height: 600px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     border: 4px solid rgb(0, 0, 0);
     padding: 20px;
     font-family: 'Calibri', sans-serif;
-    box-sizing: border-box;
-    overflow-y: auto; /* enables scrolling if content exceeds container height */
 }
 
-/* Close or rules button */
-/* Fixed position ensures the button stays on the viewport regardless of scroll */
 .rules-button {
     position: fixed;
-    /* Place the button at the top-right corner with some margin */
-    top: 10px;
-    right: 10px;
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
+    top: 0vh;
+    left: 51vw;
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
     font-size: xx-large;
     font-weight: bold;
+}.gameProfile-body {
+    display: flex;
+    height: 15vh;
+    width: 27vw;
+    background-color: rgb(75, 163, 75);
+    color: white;
+    border-radius: 20px;
+    font-family: sans-serif;
+    align-items: center;
 }
 
-/* Mobile layout adjustments */
-/* For screens with a width below 768px, adjust container and button sizes */
-@media screen and (max-width: 767px) {
-    .rules-container {
-        width: 90vw;      /* Use more of the available width */
-        height: 80vh;     /* Adjust height to fit on smaller screens */
-        max-width: none;  /* Remove max-width if needed */
-        max-height: none; /* Remove max-height if needed */
-    }
-    
-    .rules-button {
-        top: 5px;       /* Slightly reduce margin for smaller screens */
-        right: 5px;
-        font-size: x-large;  /* Adjust font size for better fit */
-    }
+.gameProfile-body-currentturn {
+    display: flex;
+    height: 15vh;
+    width: 27vw;
+    background-color: rgb(75, 163, 75);
+    color: white;
+    border-radius: 20px;
+    font-family: sans-serif;
+    align-items: center;
+    border: 5px solid white;
+}
+
+#redgold .gameProfile-body {
+    background-color: rgb(151, 42, 42);
+}
+
+#purpleyellow .gameProfile-body {
+    background-color: rgb(126, 42, 151);
+}
+
+.gameProfile-userIcon {
+    height: 70px;
+    width: 70px;
+    background-color: rgb(255, 255, 255, 0);
+    margin: 10px;
+    border-radius: 25%;
+}
+
+.gameProfile-userInfo {
+    height: 70px;
+    width: 74%;
+    /* background-color: rgb(123, 39, 39); */
+    align-items: center;
+}
+
+#gameProfile-words {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

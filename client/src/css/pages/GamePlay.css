@@ -5,13 +5,3 @@
     gap: 10px;
     padding: 20px;
 }
-
-/* Responsive adjustment: change layout for screens 767px and below */
-@media screen and (max-width: 767px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr); 
-        grid-template-rows: auto; 
-        gap: 8px; 
-        padding: 10px; 
-    }
-}
