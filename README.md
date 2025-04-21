@@ -12,7 +12,7 @@
 ---
 
 ## 🖥️ Project Overview
-This is the repository for our 513 Web Game project. It consists of a frontend client and a backend server built using Node.js and React.
+This is the repository for our 513 Web Game project. It consists of a frontend client and a backend server built using Node.js and React. The primary objective of this project is to deliver an interactive and responsive gaming experience accessible through modern web browsers.
 
 ---
 
