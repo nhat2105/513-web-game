@@ -12,6 +12,8 @@ function SinglePlayerCardGame({ gamePoints, setGamePoints }) {  // Destructure p
   const [remainingCards, setRemainingCards] = useState(deck);
   const [moves, setMoves] = useState(0);
 
+  console.log(deck);
+
   const handleClick = (index, value) => {
     // Selecting the first card or selecting the first card after a wrong pair match
     if (firstPick.index === null || (firstPick.index !== null && secondPick.index !== null)) {

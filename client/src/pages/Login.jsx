@@ -33,7 +33,7 @@ const Login = () =>{
       <div style={{fontFamily: 'sans-serif'}}>
         <img class = "home-logo" style={{width: 50 }} src='../513-cardlogo.png' alt=''/>
         <div className='home-introduction'>
-          <h1 class = "home-title">Welcome to Card Pairs</h1>
+          <h1 class = "home-title">Card Pairs</h1>
           <p class = "home-subtitle">A game of memory</p>
           <h1 style={{fontFamily: 'sans-serif', fontSize: 30}}>Login</h1>
           <div style={{ borderRadius: 5, border: '1px solid lightgray', padding: '12px 30px'}}>

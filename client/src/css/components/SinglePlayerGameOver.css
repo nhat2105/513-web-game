@@ -28,3 +28,23 @@
     justify-content: space-between;
     width: 95%;
 }
+
+@media (max-width: 400px) {
+    .singleplayer-gameover-container {
+        top: 10%;
+        left: 5%;
+        width: 90%;
+        height: 55%;
+    }
+    .singleplayer-gameover-button-position {
+        flex-direction: column;
+        align-items: center;
+    }
+    .singleplayer-gameover-format {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
