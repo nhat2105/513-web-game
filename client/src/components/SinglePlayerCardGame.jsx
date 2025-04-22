@@ -12,7 +12,20 @@ function SinglePlayerCardGame({ gamePoints, setGamePoints }) {  // Destructure p
   const [remainingCards, setRemainingCards] = useState(deck);
   const [moves, setMoves] = useState(0);
 
-  console.log(deck);
+  function logDeckAsGrid(deck) {
+    const gridSize = 6;
+    let gridOutput = '';
+    for (let i = 0; i < deck.length; i++) {
+        gridOutput += deck[i].padEnd(5, ' ') + ' ';  
+        if ((i + 1) % gridSize === 0) {
+            gridOutput += '\n';  
+        }
+    }
+    console.log(gridOutput);
+  }
+
+  // Show shuffled deck
+  logDeckAsGrid(deck);
 
   const handleClick = (index, value) => {
     // Selecting the first card or selecting the first card after a wrong pair match

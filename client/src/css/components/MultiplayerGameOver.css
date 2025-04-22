@@ -81,4 +81,25 @@
     background-color: #fff;
     color: rgb(126, 42, 151);
 }
+
+@media (max-width: 400px) {
+    .multiplayer-gameover-container {
+        padding: 20px;
+    }
+    .multiplayer-gameover-format h1 {
+        font-size: 28px;
+    }
+    .multiplayer-gameover-format h2 {
+        font-size: 20px;
+    }
+    .multiplayer-gameover-container {
+        padding: 30px;
+        text-align: center;
+        max-width: 328px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    
+    }
+}
   
