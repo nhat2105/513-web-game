@@ -3,6 +3,15 @@
   flex-direction: row;
   padding: 0;
   margin: 0;
+  background-color: rgb(98, 175, 94);
+}
+
+#redgold .gameboard-game-page {
+  background-color: rgb(151, 42, 42);
+}
+
+#purpleyellow .gameboard-game-page {
+  background-color: rgb(126, 42, 151);
 }
 
 .gameboard-cardgame {
@@ -19,22 +28,99 @@
 #redgold .gameboard-cardgame {
   background-color: rgb(151, 42, 42);
 }
+
 #purpleyellow .gameboard-cardgame {
   background-color: rgb(126, 42, 151);
 }
 
-.gameboard-userboard {
+
+@media (min-width: 400px){
+  .gameboard-userboard {
     display: grid;
     background-color: rgb(67, 86, 68);
     width: 30vw;
     height: 100vh;
     align-items: center;
     justify-content: center;
-}
-#redgold .gameboard-userboard {
-  background-color: rgb(72, 44, 44);
-}
+  }
+  #redgold .gameboard-userboard {
+    background-color: rgb(72, 44, 44);
+  }
 
-#purpleyellow .gameboard-userboard {
-  background-color: rgb(67, 44, 72);
+  #purpleyellow .gameboard-userboard {
+    background-color: rgb(67, 44, 72);
+  }
+  .gameboard-userboard-button{ 
+    display: none;
+  }
+  .gameboard-userboard-button-pressed { 
+    display: none;
+  }
+}
+@media (max-width: 400px){
+  .gameboard-cardgame { 
+    width: 100vw;
+  }
+  .gameboard-userboard {
+    display: grid;
+    background-color: rgb(67, 86, 68);
+    width: 90vw;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 5%;
+    top: 8%;
+    border-radius: 15px;
+  }
+  #redgold .gameboard-userboard {
+    background-color: rgb(72, 44, 44);
+  }
+
+  #purpleyellow .gameboard-userboard {
+    background-color: rgb(67, 44, 72);
+  }
+  .gameboard-userboard-button{
+    max-width: 15%;
+    max-height: 15%;
+    padding: 7px;
+    border-radius: 8px;
+    position: fixed;
+    right: 5%;
+    top: 3%;
+  }
+  
+  .gameboard-userboard-button:hover{
+    background-color: rgb(67, 86, 68);
+    cursor: pointer;
+  }
+  
+  #redgold .gameboard-userboard-button:hover {
+    background-color: rgb(72, 44, 44);
+    cursor: pointer;
+  }
+  
+  #purpleyellow .gameboard-userboard-button:hover {
+    background-color: rgb(67, 44, 72);
+    cursor: pointer;
+  }
+  
+  .gameboard-userboard-button-pressed {
+    background-color: rgb(67, 86, 68);
+    max-width: 15%;
+    max-height: 15%;
+    padding: 7px;
+    border-radius: 8px;
+    position: fixed;
+    right: 5%;
+    top: 3%;
+  }
+  
+  #redgold .gameboard-userboard-button-pressed {
+    background-color: rgb(72, 44, 44);
+  }
+  
+  #purpleyellow .gameboard-userboard-button-pressed {
+    background-color: rgb(67, 44, 72);
+  }
 }

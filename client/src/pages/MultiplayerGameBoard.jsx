@@ -14,6 +14,42 @@ const MultiplayerGameBoard = () => {
     const [currentPlayerTurn, setCurrentPlayerTurn] = useState("");
     const [style,setStyle] = useState("");
     const [players,setPlayers] = useState([]);
+
+    const [checkUserBoard, setCheckUserBoard] = useState(true);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const checkUserToggleIcon = () => { 
+        if (checkUserBoard) {
+            return 'gameboard-userboard-button-pressed';
+        }
+        else {
+            return 'gameboard-userboard-button';
+        }
+    };
+
+    const toggleUserBoard = () => { 
+        setCheckUserBoard(!checkUserBoard);
+    }
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); 
+
+    useEffect(() => {
+        if (windowWidth < 400) {
+            setCheckUserBoard(false);
+        } else {
+            setCheckUserBoard(true); 
+        }
+    }, [windowWidth]);
+
+
     useEffect(() => {
         setMaxPlayers(gamestate.maxPlayers);
         setCurrentPlayerTurn(gamestate.players[gamestate.currentTurnIndex].username);
@@ -27,17 +63,6 @@ const MultiplayerGameBoard = () => {
         }
         setPlayers(gamestate.players);
     },[gamestate])
-    // function getGameStyle() {
-    //     if(gamestate.gamestyle === "Red & Gold") {
-    //         console.log("Red & Gold style selected")
-    //         return "redgold";
-    //     } else if (gamestate.gamestyle === "Purple & Yellow") {
-    //         return "purpleyellow";
-    //     } else {
-    //         return "";
-    //     }
-
-    // }
 
     return (
         <div id = {style}>
@@ -47,11 +72,12 @@ const MultiplayerGameBoard = () => {
             </div>
             <MultiplayerWait currentPlayers = {players.length} totalPlayers={maxPlayers}/>
             {/* {console.log("Initial game state using dispatch: ", gamestate)} */}
-            <div className='gameboard-userboard'>
+            {<img className={checkUserToggleIcon()} src='../tri-bars.png' onClick={toggleUserBoard}/>}
+            {checkUserBoard && <div className='gameboard-userboard'>
                 {players.map((player, i) => (
                     <GameProfile key={i} playerName={player.username} points={player.score} currentPlayerTurn = {currentPlayerTurn}/>
                 ))}
-            </div>
+            </div>}
           </div>
         </div>
     );

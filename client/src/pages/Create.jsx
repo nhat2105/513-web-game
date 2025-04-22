@@ -93,10 +93,11 @@ const Create = () => {
         style={{ width: 50 }}
         src='../513-cardlogo.png'
         alt="logo"
+        id = 'mobile'
       />
       
       <div className="home-introduction">
-        <h1 className="home-title">Welcome to Card Pairs</h1>
+        <h1 className="home-title">Card Pairs</h1>
         <p className="home-subtitle">A game of memory</p>
         <h1 style={{ fontFamily: 'sans-serif', fontSize: 30 }}>Host New Game</h1>
         <div style={{ borderRadius: 5, border: '1px solid lightgray', padding: '12px 30px'}}>
