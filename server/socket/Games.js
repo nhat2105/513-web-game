@@ -5,7 +5,7 @@ class Games {
     }
 
     // Add a new game (room)
-    addGame(hostID, roomName, difficulty, count) {
+    addGame(hostID, roomName, difficulty, count, max, gamestyle) {
         let game = {
             host: hostID,
             room: roomName,
@@ -16,17 +16,20 @@ class Games {
             matchedPairs: [],
             flippedCards: [],
             currentTurnIndex: 0, // Tracks whose turn it is
+            maxPlayers: max, // Maximum number of players allowed in the game
+            gamestyle: gamestyle,
         };
         this.games.push(game);
         return game;
     }
     
     // Add a player to the game
-    addPlayer(username, room, hostID) {
+    // addPlayer(username, room, hostID) {
+    addPlayer(username, room) {
         let player = {
             username: username,
             roomName: room,
-            roomID: hostID,
+            // roomID: hostID,
             player_turn: 0,
             score: 0,
         };
@@ -81,6 +84,18 @@ class Games {
     checkRoomName(roomName) {
         return !this.games.some((game) => game.room === roomName);
     }
+
+    // Destroy Game
+    destroyGame(roomName) { {
+        let gameIndex = this.games.findIndex((game) => game.room === roomName);
+        if (gameIndex !== -1) {
+            this.games.splice(gameIndex, 1); // Remove the game from the list
+        }
+        let playerIndex = this.players.findIndex((player) => player.roomName === roomName);
+        if (playerIndex !== -1) {
+            this.players.splice(playerIndex, 1); // Remove the player from the list
+        }
+    } }
 }
 
 module.exports = { Games };

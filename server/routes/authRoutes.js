@@ -5,10 +5,11 @@ const router = express.Router();
 
 // Register route
 router.post('/register', async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username, password} = req.body;
   try {
-    await authController.registerUser(username, password, role);
+    await authController.registerUser(username, password);
     res.status(201).json({ message: 'User registered successfully' });
+    //console.log("WELCOME BITCH")
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -35,5 +36,16 @@ router.get('/guest', async (req, res) => {
     res.status(500).json({ message: 'Error generating guest token' });
   }
 });
+
+router.put('/password', async(req, res) => {
+  try {
+    const { username, password, newpassword } = req.body;
+    await authController.changeUserPassword(username, password, newpassword);
+    res.status(200).json({ message: 'OK' });
+    console.log("YEAH")
+  } catch (err) {
+    res.status(400).json({ message: err});
+  }
+})
 
 module.exports = router;

@@ -1,3 +1,4 @@
+/* Pages */
 @import url("./pages/Home.css");
 @import url("./pages/Login.css");
 @import url("./pages/MultiplayerGameBoard.css");
@@ -5,6 +6,11 @@
 
 @import url("./pages/UniversalElements.css");
 
+/* Components */
 @import url("./components/CardGame.css");
 @import url("./components/GameProfile.css");
-
+@import url("./components/DaRules.css");
+@import url("./components/SinglePlayerGameOver.css");
+@import url("./components/MultiplayerGameOver.css");
+@import url("./components/MultiplayerWait.css");
+@import url("./components/UserMenu.css");

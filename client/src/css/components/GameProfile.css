@@ -9,10 +9,38 @@
     align-items: center;
 }
 
+.gameProfile-body-currentturn {
+    display: flex;
+    height: 15vh;
+    width: 27vw;
+    background-color: rgb(75, 163, 75);
+    color: white;
+    border-radius: 20px;
+    font-family: sans-serif;
+    align-items: center;
+    border: 5px solid white;
+}
+
+#redgold .gameProfile-body {
+    background-color: rgb(151, 42, 42);
+}
+
+#redgold .gameProfile-body-currentturn {
+    background-color: rgb(151, 42, 42);
+}
+
+#purpleyellow .gameProfile-body {
+    background-color: rgb(126, 42, 151);
+}
+
+#purpleyellow .gameProfile-body-currentturn {
+    background-color: rgb(126, 42, 151);
+}
+
 .gameProfile-userIcon {
     height: 70px;
     width: 70px;
-    background-color: white;
+    background-color: rgb(255, 255, 255, 0);
     margin: 10px;
     border-radius: 25%;
 }
@@ -27,4 +55,16 @@
 #gameProfile-words {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+@media (max-width: 400px) {
+    .gameProfile-body {
+        height: 15vh;
+        width: 70vw;
+    }
+    .gameProfile-body-currentturn {
+        height: 15vh;
+        width: 70vw;
+    }
+
 }

@@ -1,18 +1,21 @@
 #input-button {
-    background-color: rgb(82, 171, 66);
+    background-color: rgba(87, 200, 81, 1);
     text-decoration: none;
     color: white;
-    font-family: 'Calibri', sans-serif;
+    font-family: sans-serif;
     padding: 6px 18px 6px 18px;
     border-radius: 10px;
-    border: 2.5px rgb(82, 171, 66);
+    border: 2.5px rgba(87, 200, 81, 1);
     border-style: solid;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #input-button:hover {
-    color: rgb(82, 171, 66);
+    color: rgba(87, 200, 81, 1);
     background-color: white;
     transition: 0.1s;
+    cursor: pointer;
 }
 
 #rules-button {
@@ -29,8 +32,30 @@
     text-decoration: none;
     color: black;
     font-family: 'Calibri', sans-serif;
-    padding: 3px 12px 3px 12px;
+    padding: 3px 12px 2px 12px;
     border-radius: 10px;
     transition: 0.1s;
     cursor: pointer;
+}
+#gameover-button {
+    background-color: rgb(93, 132, 87);
+    text-decoration: none;
+    color: white;
+    font-family: 'Calibri', sans-serif;
+    padding: 6px 18px 6px 18px;
+    border-radius: 10px;
+    border: 2.5px rgb(255, 255, 255);
+    border-style: solid;    
+}
+
+#gameover-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(93, 132, 87);
+    transition: 0.1s;
+}
+
+@media (max-width: 400px) {
+    #mobile {
+        display: none;
+    }
 }

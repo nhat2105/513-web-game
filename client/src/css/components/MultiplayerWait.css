@@ -1,0 +1,38 @@
+
+.multiplayer-wait-background {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000000;
+    color: rgb(255, 255, 255);
+    font-family: 'Calibri', sans-serif;
+    text-align: center;
+}
+
+.multiplayer-wait-container {
+    position: fixed;
+    background-color: rgb(93, 132, 87);
+    border-radius: 10px;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+}
+
+#redgold .multiplayer-wait-container {
+    background-color: rgb(132, 87, 87);
+}
+
+#purpleyellow .multiplayer-wait-container {
+    background-color: rgb(132, 87, 132);
+}
+
+@media (max-width: 400px) {
+    .multiplayer-wait-container {
+        width: 50%;
+        height: 20%;
+    }
+}

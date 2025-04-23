@@ -1,12 +1,27 @@
 import React from "react";
+import pfp_1 from "../assets/pfp1.png";
+import { useSelector } from 'react-redux'; 
 
-const GameProfile = () => { 
+const GameProfile = ({ playerName, points, currentPlayerTurn }) => { 
+    // Ensure randomInt is an integer between 1 and 2
+    // const randomInt = Math.floor(Math.random() * 2) + 1;
+
+    const currentTurn = () => {
+        console.log("Current player turn: ", currentPlayerTurn)
+        if(currentPlayerTurn === playerName) {
+            return "gameProfile-body-currentturn";
+        } else {
+            return "gameProfile-body";
+        };
+    };
+
     return (
-        <div className="gameProfile-body">
-            <img src="placeholder" className="gameProfile-userIcon"></img>
+        <div className = {currentTurn()}>
+            {<img src="../default_user_icon.png" className="gameProfile-userIcon" alt="User Icon 2" />}
+            
             <div className="gameProfile-userInfo"> 
-                <div id = "gameProfile-words">Username</div>
-                <div>Points: 0</div>
+                <div id="gameProfile-words">Player: {playerName}</div>
+                <div>Points: {points}</div>
             </div>
         </div>
     );

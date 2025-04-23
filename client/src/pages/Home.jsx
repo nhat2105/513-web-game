@@ -1,53 +1,62 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import DaRules from '../components/DaRules'
+import UserMenu from '../components/UserMenu';
+import React, { useState, useEffect } from 'react';
 
 // import { guestLogin } from '../axios/api';
 const Home = () => {
-  const navigate = useNavigate(); // useNavigate hook for routing
-  const [loading, setLoading] = useState(false);
+  const [showRules, setShowRules] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isUserIconClicked, setIsUserIconClicked] = useState(false);
 
-  // Function to handle guest login
-  const handleGuest = async () => {
-    setLoading(true);
+  useEffect(() => {
+    // Check sessionStorage when the component mounts
+    if (sessionStorage.getItem("loggedIn") === "true") {
+      setLoggedIn(true);
+    }
+    else {
+      setLoggedIn(false);
+    }
+  }, []);
 
-    try {
-      // const response = await guestLogin(); // Call the backend for guest token
-      // const { token, role } = response.data;
+  const toggleRules = () => {
+    setShowRules(!showRules);
+    console.log("Rules button clicked");
+  };
 
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('role', role); // Store the guest role
+  const toggleUserIcon = () => {
+    setIsUserIconClicked(!isUserIconClicked);
+    console.log("User icon clicked");
+  };
 
-      setLoading(false);
-      navigate('/game'); // Redirect to the game page after login
-    } catch (error) {
-      console.error('Error logging in as guest', error);
-      setLoading(false);
+  const iconApperance = () => {
+    if (isUserIconClicked) {
+      return "home-user-icon-pressed";
+    } else {
+      return "home-user-icon";
     }
   };
 
-  // Redirect to the login page for regular users
-  const handleLogin = () => {
-    navigate('/login'); 
-  };
-
   return(
-    <body>
-      <br/>
-      <div class = "home-login-button">
-        <a href = "/login" id = "input-button" onClick={handleLogin}>Login</a>
+    <div>
+      {<DaRules showRules = {showRules} setShowRules={setShowRules}/>}
+      {!isLoggedIn &&<div className = "home-login-button">
+        <a href = "/login" id = "input-button">Login</a>
+      </div> }
+      {isLoggedIn && <img className={iconApperance()} src='../default_user_icon.png' onClick={toggleUserIcon}/>}
+      {isUserIconClicked && <UserMenu isLoggedIn = {isLoggedIn} setLoggedIn = {setLoggedIn} setIsUserIconClicked = {setIsUserIconClicked}/>}
+      <div className = "home-introduction">
+        <h1 className = "home-title">Card Pairs</h1>
+        <p className = "home-subtitle">A game of Memory</p>
+        <img className = "home-logo" src='../513-cardlogo.png' alt='card_pair_logo'/>
       </div>
-      <div class = "home-introduction">
-        <h1 class = "home-title">Welcome to Card Pairs</h1>
-        <p class = "home-subtitle">A game of memory</p>
-        <img class = "home-logo" src='../513-cardlogo.png'/>
-      </div>
-      <div class = "home-buttons-list">
-        <a href = "/create" id = "input-button">Create Game</a>
+      <div className = "home-buttons-list">
+        <a href = "/Sgame" id = "input-button">Single Player</a>
+        {isLoggedIn && <a href = "/create" id = "input-button">Create Game</a>}
         <a href = "/join" id = "input-button">Join Game</a>
-        <a id = "rules-button">Rules</a>
+        <a id = "rules-button" onClick={toggleRules}>Rules</a>
       </div>
     
-    </body>
+    </div>
   )
 }
 

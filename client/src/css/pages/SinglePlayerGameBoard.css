@@ -1,0 +1,77 @@
+@media (min-width: 400px) {
+    .singleplayer-board{
+        display: flex;
+        background-color: rgb(98, 175, 94);
+        width: 99vw;
+        height: 97vh;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: 'Calibri', sans-serif;
+    }
+
+    .singleplayer-points{
+        position: absolute;
+        left: 1.5%;
+        top: 89%;    
+    }
+
+    .singleplayer-quit-button { 
+        position: absolute;
+        left: 86%;
+        top: 89%;
+        background-color: rgb(98, 175, 94);
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        padding: 9px 36px 9px 36px;
+        border: 2.5px solid white;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .singleplayer-quit-button:hover { 
+        color: rgb(98, 175, 94);
+        background-color: white;
+        transition: 0.1s;
+    };
+}
+
+@media (max-width: 400px){
+    .singleplayer-board{
+        display: flex;
+        background-color: rgb(98, 175, 94);
+        width: 99vw;
+        height: 97vh;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: 'Calibri', sans-serif;
+    }
+
+    .singleplayer-points{
+        position: absolute;
+        left: 5.5%;
+        top: 89%;    
+    }
+
+    .singleplayer-quit-button { 
+        position: absolute;
+        left: 55%;
+        top: 91%;
+        background-color: rgb(98, 175, 94);
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        padding: 9px 36px 9px 36px;
+        border: 2.5px solid white;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .singleplayer-quit-button:hover { 
+        color: rgb(98, 175, 94);
+        background-color: white;
+        transition: 0.1s;
+    }
+}

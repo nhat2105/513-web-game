@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
-import { register } from '../axios/api';
+import { changePassword } from '../axios/api';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () =>{
-  const [username, setUsername] = useState('');
+const ChangePassword = () =>{
+  const [newPassword, setNewPassword] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  
-   const handleRegister = async (e) => {
+  const username = sessionStorage.getItem("username")
+
+   const handleChangePassword = async (e) => {
       e.preventDefault();
       try {
-        if (password !== passwordConfirm){
-            setError("Please confirmation not matched.");
+        //console.log("username fetched: ", username)
+
+        if (newPassword !== newPasswordConfirm){
+            setError("Please try again. Confirmation not matched.");
             return;
         }
-        await register(username, password);
+        await changePassword(username, password, newPassword);
 
-        //localStorage.setItem('token', data.token);
-        navigate('/login'); // Navigate to the login after register
+        alert("Changed password successfully");
+        navigate('/'); // Navigate to the login after register
       } catch (err) {
-        setError('Register failed');
+        setError('Change password failed');
       }
     };
 
-    const redirectLogin = () => {
-        navigate('/login')
+    const redirectHomePage = () => {
+        navigate('/')
     }
   
     return (
@@ -35,38 +38,37 @@ const Register = () =>{
         <div className='home-introduction'>
           <h1 class = "home-title">Welcome to Card Pairs</h1>
           <p class = "home-subtitle">A game of memory</p>
-          <h1 style={{fontFamily: 'sans-serif', fontSize: 30}}>Register New Account</h1>
+          <h1 style={{fontFamily: 'sans-serif', fontSize: 30}}>Security</h1>
           <div style={{ borderRadius: 5, border: '1px solid lightgray', padding: '12px 30px'}}>
-            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleRegister}>
-              <h3 style={{ marginBottom: '5px' }}>Username</h3>
+            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleChangePassword}>
+              <h3 style={{ marginBottom: '5px' }}>Current Password</h3>
               
               <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="password"
+                placeholder="Current Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 style={{ width: 300, padding: '8px', marginBottom: '12px', borderRadius: '4px', border: '1px solid lightgray' }}
               />
 
-              <h3 style={{ marginBottom: '5px' }}>Password</h3>
+              <h3 style={{ marginBottom: '5px' }}>New Password</h3>
               <input
                 type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 style={{ padding: '8px', marginBottom: '12px', borderRadius: '4px', border: '1px solid lightgray' }}
               />
 
-              <h3 style={{ marginBottom: '5px' }}>Confirm Password</h3>
+              <h3 style={{ marginBottom: '5px' }}>Confirm New Password</h3>
               
               <input
                 type="password"
-                placeholder="Confirm Password"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
+                placeholder="Confirm New Password"
+                value={newPasswordConfirm}
+                onChange={(e) => setNewPasswordConfirm(e.target.value)}
                 style={{ width: 300, padding: '8px', marginBottom: '12px', borderRadius: '4px', border: '1px solid lightgray' }}
               />
-
               
               <button
                 type="submit"
@@ -82,10 +84,10 @@ const Register = () =>{
                   marginTop: '10px'
                 }}
               >
-                Sign Up
+                Save Changes
               </button>
             
-              <p style={{fontSize: 15, textAlign: 'center'}}>Already have an account? <span onClick={redirectLogin} className='highlight-link'>Login</span></p>
+              <p style={{textAlign: 'center'}} onClick={redirectHomePage} className='highlight-link'>Discard changes</p>
             </form>
 
 
@@ -93,13 +95,10 @@ const Register = () =>{
 
           {error && <p style={{ fontFamily: 'sans-serif', color: 'red', marginTop: '10px' }}>{error}</p>}
 
-
-
         </div>
       </div>
     );
-  
 }
 
 
-export default Register;
+export default ChangePassword;

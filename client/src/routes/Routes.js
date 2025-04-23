@@ -8,20 +8,22 @@ import Join from "../pages/Join";
 import Register from "../pages/Register";
 import MultiplayerGameBoard from "../pages/MultiplayerGameBoard";
 import SinglePlayerGameBoard from "../pages/SinglePlayerGameBoard";
+import ChangePassword from "../pages/ChangePassword";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const Routes = () => {
-    
     return(
         <RoutesWrapper>
             <Route path='/' element={<Home />} />
-            {/* <Route path='/game' element={<GamePlay/>} /> */}
             <Route path='/login' element={<Login />} />
             <Route path='/create' element={<Create />} />
             <Route path='/join' element={<Join />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/Mgame' element={<MultiplayerGameBoard />} />
+            <Route path='/Mgame/:roomName' element={<MultiplayerGameBoard />} />
             <Route path='/Sgame' element={<SinglePlayerGameBoard />} />
-            
+            <Route path="/password"  element={<ChangePassword />} />
+
+            <Route path="*" element={<NotFoundPage />} />
         </RoutesWrapper>
     )
 }
