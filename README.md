@@ -1,5 +1,11 @@
 # 513-web-game
 
+# Note
+
+In order to run this project, you must have PSQL (Postgres) support.
+
+Change DB_PASSWORD and POSTGRES_PASSWORD to your own set up password in .env of backend
+
 # Team members (Group 34):
     Kevin Xie (30148341)
     Siqing Liu (30127864)
@@ -19,44 +25,16 @@
 `cd server`
 `npm install .`
 
-# Starting server / client `cd server` or `cd client`
+# Starting server / client `cd server` or `cd client` without deployment
+
+In .env, comment out the DB_HOST=db, while uncomment out the DB_HOST=localhost
+
 
 `npm start`
 
 # Docker build
 
+In .env, uncomment out the DB_HOST=db, while comment out the DB_HOST=localhost
+
 While having the Docker Desktop open, you can just run: `docker compose up` 
 from the repo without entering any folder
-
-# 513 Web Game  
-**Group 22**
-
-## 👥 Team Members
-- Kevin Xie (30148341)  
-- Siqing Liu (30127864)  
-- Zirui Wang (30119554)  
-- Hong Truong (30156301)  
-- Dhanraj Dubal (30173234)  
-- Aditi Yadav (30143652)  
-
----
-
-## 🖥️ Project Overview
-This is the repository for our 513 Web Game project. It consists of a frontend client and a backend server built using Node.js and React. The primary objective of this project is to deliver an interactive and responsive gaming experience accessible through modern web browsers.
-
----
-
-## 🚀 Getting Started
-
-### 🧱 Prerequisites
-- [Node.js](https://nodejs.org/) (v16+ recommended)
-- [npm](https://www.npmjs.com/)
-
----
-
-### 🔧 Client Setup
-
-#### First Time Initialization
-```bash
-cd client
-npm install
