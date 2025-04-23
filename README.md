@@ -6,7 +6,7 @@ In order to run this project, you must have PSQL (Postgres) support.
 
 Change DB_PASSWORD and POSTGRES_PASSWORD to your own set up password in .env of backend
 
-# Team members (Group 34):
+# Team members (Group 22):
     Kevin Xie (30148341)
     Siqing Liu (30127864)
     Zirui Wang (30119554)
